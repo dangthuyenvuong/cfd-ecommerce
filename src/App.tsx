@@ -16,7 +16,7 @@ import { loadCategories } from "./actions/categoriesAction";
 
 import { useDispatch } from "react-redux";
 const routes = [
-  { path: "/category", name: "Category", Component: Category },
+  { path: "/category/:cat?", name: "Category", Component: Category },
   { path: "/product-details", name: "ProductDetails", Component: Details },
   { path: "/checkout", name: "Check Out", Component: Checkout },
   { path: "/login", name: "Login", Component: Login },
@@ -29,27 +29,25 @@ function App() {
 
   useEffect(() => {
     Api('categories').get()
-      .then(res => {
+      .then((res: any) => {
         dispatch(loadCategories(res));
       })
   }, [])
 
 
   return (
-    <div>
-      <Router>
-        <Cart cartState={cartState} setCartState={setCartState} />
-        <Header setCartState={setCartState} />
-        <Switch>
-          {routes.map(({ path, Component }) => (
-            <Route key={path} path={path}>
-              <Component />
-            </Route>
-          ))}
-        </Switch>
-        <Footer />
-      </Router>
-      </div>
+    <Router>
+      <Cart cartState={cartState} setCartState={setCartState} />
+      <Header setCartState={setCartState} />
+      <Switch>
+        {routes.map(({ path, Component }) => (
+          <Route key={path} path={path}>
+            <Component />
+          </Route>
+        ))}
+      </Switch>
+      <Footer />
+    </Router>
   );
 }
 

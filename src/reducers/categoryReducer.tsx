@@ -1,19 +1,19 @@
-import { FETCH_FINISH } from '../actions/type'
+import { CATEGORY_FINISH } from '../actions/type'
 
 
 let initState: any = {
-    categories: []
+    list: []
 }
 
 
 
 
 
-export default function(state: any = initState, action: any){
+export default function (state: any = initState, action: any) {
 
     switch (action.type) {
-        case FETCH_FINISH:
-            return { categories: action.payload }
+        case CATEGORY_FINISH:
+            return { list: action.payload }
         default: return state;
     }
     return state;

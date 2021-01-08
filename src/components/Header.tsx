@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function Header({setCartState} : any) {
+  const categories = useSelector((state: any) => state.categories).list
+
   return (
     <>
       <div className="header">

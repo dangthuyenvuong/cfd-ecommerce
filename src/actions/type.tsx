@@ -1,5 +1,8 @@
 export const LOADING = 'LOADING'
-export const FETCHING = 'FETCHING'
-export const FETCH_FINISH = 'FETCH_FINISH'
+export const CATEGORY_FINISH = 'CATEGORY_FINISH'
+
+
+
+export const PRODUCT_FINISH = 'PRODUCT_FINISH'
 
 export default {}

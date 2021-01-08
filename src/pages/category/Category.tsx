@@ -1,28 +1,49 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import { Switch, Route, useRouteMatch, NavLink } from "react-router-dom";
+import { Switch, Route, useRouteMatch, NavLink, useParams, useHistory } from "react-router-dom";
 import ListView from "./components/ListView";
 import GridView from "./components/GridView";
 import FilterBar from "./components/FilterBar";
 import Paginate from "../../components/Paginate";
 import Api from "../../helper/Api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "../../actions/productAction";
+import { getQueryParam, convertObjToQueryURL } from "../../hooks/queryURL";
 export default function Category() {
   let { url } = useRouteMatch();
   // let [categories, setCategories] = useState(null);
 
-  // useEffect(() => {
-  //   Api('categories').get()
-  //     .then(res => {
-  //       setCategories(res);
-  //     })
-  // }, [])
+  const dispatch = useDispatch()
+  let urlParams: any = useParams();
+  let history = useHistory();
 
-  let categories = useSelector((store: any) => store.cateogries)
+  let catID = urlParams?.cat?.replace(/[^0-9]/g, '');
 
-  if (!categories) return null;
 
-  console.log(url);
+  useEffect(() => {
+    Api('product' + (catID ? `?categories=${catID}` : '')).get()
+      .then(res => {
+        dispatch(fetchProduct(res))
+      })
+  }, [catID])
+
+  let categories = useSelector((store: any) => store.categories).list
+  const product = useSelector((state: any) => state.product)
+
+  if (categories.length === 0) return null;
+
+  let view = getQueryParam().view || 'list'
+
+
+  function sortPrice(flag: number) {
+    let query = getQueryParam()
+    query.sort = `price.${flag}`
+
+    history.push({
+      pathname: window.location.pathname,
+      search: '?' + convertObjToQueryURL(query)
+    })
+  }
   return (
     <>
       <Breadcrumbs links={[
@@ -34,13 +55,13 @@ export default function Category() {
           <div className="heading">
             <h2 className="heading--title">Fruit and vegetables</h2>
             <div className="heading--group">
-              <NavLink to={`${url}/grid-view`} className="heading--item">
+              <NavLink to={`${url}?view=grid`} className="heading--item">
                 <span>
                   <img src="/assets/icon-square.svg" alt="" />
                 </span>
                 <span className="type">Grid view</span>
               </NavLink>
-              <NavLink exact to={`${url}`} className="heading--item">
+              <NavLink exact to={`${url}?view=list`} className="heading--item">
                 <span>
                   <img src="/assets/icon-section.svg" alt="" />
                 </span>
@@ -57,14 +78,14 @@ export default function Category() {
               <div className="filter--item">
                 <div className="field">
                   <input type="radio" id="small" name="size" />
-                  <label htmlFor="small" className="radio">
-                    Filter text
+                  <label htmlFor="small" className="radio" onClick={sortPrice.bind(null, 1)}>
+                    Giá cao
                   </label>
                 </div>
                 <div className="field">
                   <input type="radio" id="big" name="size" defaultChecked />
-                  <label htmlFor="big" className="radio">
-                    Filter text
+                  <label htmlFor="big" className="radio" onClick={sortPrice.bind(null, -1)}>
+                    Giá thấp
                   </label>
                 </div>
               </div>
@@ -72,7 +93,7 @@ export default function Category() {
                 <div className="field">
                   <input type="checkbox" id="small" name="size" />
                   <label htmlFor="small" className="checkbox">
-                    Filter
+                    Giao nhanh
                   </label>
                   <div className="nbm">nbm</div>
                 </div>
@@ -81,7 +102,7 @@ export default function Category() {
                 <div className="field">
                   <input type="checkbox" id="small" name="size" />
                   <label htmlFor="small" className="checkbox">
-                    Filter
+                    Chính hãng
                   </label>
                   <div className="nbm">nbm</div>
                 </div>
@@ -124,15 +145,11 @@ export default function Category() {
                 <FilterBar categories={categories} />
               </div>
               <div className="col-md-9 products">
-                <Switch>
-                  <Route path={`${url}/grid-view`}>
-                    <GridView />
-                  </Route>
-                  <Route exact path={`${url}`}>
-                    <ListView />
-                  </Route>
-                </Switch>
-                <Paginate />
+                {
+                  view === 'grid' ? <GridView product={product.list} /> :
+                    <ListView product={product.list} />
+                }
+                <Paginate {...product.paginate} />
               </div>
             </div>
           </div>

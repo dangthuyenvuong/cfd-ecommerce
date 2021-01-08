@@ -1,20 +1,40 @@
 import React from "react";
 
-export default function CardList({image} :any){
+const style: { [key in string]: React.CSSProperties } = {
+  rating: {
+    background: 'url(/assets/icon-star-none.svg) repeat-x',
+    height: 20,
+    width: 85,
+    position: 'relative'
+  },
+  ratingValue: {
+    background: 'url(/assets/icon-star-black.svg) repeat-x',
+    height: 20,
+    position: 'absolute',
+    backgroundSize: 17,
+
+  },
+  ratingNumber: {
+    position: 'absolute',
+    right: -25
+  }
+}
+
+export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any }) {
+  let { price, real_price, name, thumbnail_url, percent, rating_average, stock_item } = props;
+
   return (
     <div className="card--list">
       <div className="card--image">
-        <img src={image} alt="" />
+        <img src={thumbnail_url} alt="" />
       </div>
       <div className="card--details">
-        <h2 className="title">Product title</h2>
-        <div className="desc">Space for a small product description</div>
-        <div className="start--group">
-          <img src="/assets/icon-star-black.svg" alt="" />
-          <img src="/assets/icon-star-black.svg" alt="" />
-          <img src="/assets/icon-star-black.svg" alt="" />
-          <img src="/assets/icon-star-black.svg" alt="" />
-          <img src="/assets/icon-star-none.svg" alt="" />
+        <h2 className="title">{name}</h2>
+        {/* <div className="desc">Space for a small product description</div> */}
+        <div className="start--group" style={style.rating}>
+          <div className="rating-value" style={{ ...style.ratingValue, width: `${rating_average / 5 * 100}%` }}></div>
+          <span style={style.ratingNumber}>{rating_average}</span>
+
         </div>
         <div className="details">
           <ul className="left">
@@ -28,7 +48,7 @@ export default function CardList({image} :any){
               <span>Delivery</span>
             </li>
             <li>
-              <span>Stock</span>
+              <span>Còn lại</span>
             </li>
           </ul>
           <ul className="right">
@@ -44,28 +64,28 @@ export default function CardList({image} :any){
               <span>Europe</span>
             </li>
             <li>
-              <span className="green">320 pcs</span>
+              <span className="green">{stock_item?.qty}</span>
             </li>
           </ul>
         </div>
       </div>
       <div className="card--price">
         <div className="card--price__top">
-          <p className="price">36.99 USD</p>
-          <p className="discount">48.56</p>
+          <p className="price">{real_price} vnđ</p>
+          <p className="discount">{price}</p>
         </div>
         <div className="card--price__mid">
-          <p>Free Shipping</p>
-          <p>Delivery in 1 day</p>
+          <p>Miễn phí giao hàng</p>
+          <p>Gia hàng trong 1 ngày</p>
         </div>
         <div className="card--price__bot">
           <div className="btn btn-buy">
-            <span>Product Detail</span>
+            <span>Chi tiết</span>
             <img src="/assets/right-white.svg" alt="" />
           </div>
           <div className="btn--more">
             <img src="/assets/icon-heart.svg" alt="" />
-            <span>Add to wish list</span>
+            <span>Thêm vào yêu thích</span>
           </div>
         </div>
       </div>

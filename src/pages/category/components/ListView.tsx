@@ -1,14 +1,14 @@
 import React from 'react'
 import CardList from '../../../components/CardList'
+import { widthProduct } from '../../../hoc/withProduct';
 
-export default function ListView() {
+export default function ListView(props: { product: [] }) {
+    let { product } = props;
     return (
         <>
-            <CardList image={"/assets/Image-light.jpg"}/>
-            <CardList image={"/assets/Image-light2.jpg"}/>
-            <CardList image={"/assets/Image-light3.jpg"}/>
-            <CardList image={"/assets/Image-light4.jpg"}/>
-            <CardList image={"/assets/Image-light5.jpg"}/>
+            {
+                product.map((e: any) => <React.Fragment key={e._id}>{widthProduct(CardList, e)}</React.Fragment>)
+            }
         </>
     )
 }

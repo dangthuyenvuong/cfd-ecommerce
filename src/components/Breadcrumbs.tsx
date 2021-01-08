@@ -12,11 +12,11 @@ interface Links {
 export default function Breadcrumbs({ links = [] }: Links) {
   let list = links.map((e, i: number) => {
     if (e?.link) {
-      return <Link to={e.link}>{e.title} </Link>;
+      return <Link to={e.link} key={i}>{e.title} </Link>;
     } else if (i < links.length - 1) {
-      return <span> / {e.title}</span>;
+      return <span key={i}> / {e.title}</span>;
     } else {
-      return <span className="breadcrumbs--item">/ {e.title}</span>;
+      return <span className="breadcrumbs--item" key={i}>/ {e.title}</span>;
     }
   });
   return (

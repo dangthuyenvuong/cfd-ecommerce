@@ -1,8 +1,8 @@
-import { FETCH_FINISH, FETCHING } from './type'
+import { CATEGORY_FINISH } from './type'
 
 export function loadCategories(data: any) {
     return {
-        type: FETCH_FINISH,
+        type: CATEGORY_FINISH,
         payload: data
     }
 }

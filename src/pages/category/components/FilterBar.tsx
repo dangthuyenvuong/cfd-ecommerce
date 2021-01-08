@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
 import FilterPrice from "./FilterPrice";
 
+const style: { [key in string]: React.CSSProperties } = {
+  menuActive: {
+    fontWeight: 'bold'
+  }
+}
+
 export default function FilterBar(props: { categories: any[] | null }) {
   let { categories } = props;
 
@@ -10,13 +16,13 @@ export default function FilterBar(props: { categories: any[] | null }) {
         <h2 className="title">Categories</h2>
         <ul>
           {
-            categories?.map(e => <li>
-              <NavLink to={`/category/${e.slug}`}>
+            categories?.map(e => <li key={e._id}>
+              <NavLink to={`/category/${e.slug}`} activeStyle={style.menuActive}>
                 {e.title}
               </NavLink>{" "}
             </li>)
           }
-{/* 
+          {/* 
           <li>
             <a href="#">
               {" "}
