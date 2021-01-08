@@ -1,24 +1,29 @@
 .cart {
+
   &--inner {
     padding: 24px 16px;
   }
+
   &--head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 24px;
   }
+
   &--title {
     font-weight: 600;
     font-size: 26px;
     line-height: 39px;
     color: #151515;
   }
+
   &--close {
     font-size: 12px;
     line-height: 16px;
     color: #d1d1d1;
     cursor: pointer;
+
     img {
       width: 24px;
       height: 24px;
@@ -26,25 +31,31 @@
       margin-left: 4px;
     }
   }
+
   &--body {
     overflow: auto;
     height: 370px;
+
     .cart--item {
       display: grid;
       grid-template-columns: 100px auto;
       grid-template-rows: auto;
       column-gap: 16px;
       margin-bottom: 32px;
+
       .image {
         grid-area: 1/1/3/1;
       }
+
       .wishlist {
         grid-area: 3/1/3/1;
+
         img {
           width: 12px;
           height: 12px;
           object-fit: cover;
         }
+
         span {
           font-size: 12px;
           line-height: 16px;
@@ -52,9 +63,11 @@
           margin-left: 6px;
         }
       }
+
       .close {
         grid-area: 4/1/4/1;
         cursor: pointer;
+
         span {
           font-size: 12px;
           line-height: 16px;
@@ -62,6 +75,7 @@
           color: #a9a9a9;
         }
       }
+
       .name {
         grid-area: 1/2/1/2;
         font-weight: 600;
@@ -71,16 +85,19 @@
         margin-bottom: 7px;
         color: #151515;
       }
+
       .details {
         &--row {
           display: grid;
           grid-auto-columns: 100px auto;
           margin-bottom: 7px;
+
           .title {
             font-size: 12px;
             line-height: 16px;
             color: #a9a9a9;
           }
+
           .desc {
             font-size: 12px;
             line-height: 16px;
@@ -88,15 +105,18 @@
           }
         }
       }
+
       .bottom {
         grid-area: 6/2/6/2;
         display: flex;
         justify-content: space-between;
+
         .price {
           font-weight: 600;
           font-size: 18px;
           line-height: 27px;
           color: #6a983c;
+
           span {
             display: block;
             font-weight: 600;
@@ -106,12 +126,14 @@
             color: #a9a9a9;
           }
         }
+
         .quantity {
           display: flex;
           border: 1px solid #d1d1d1;
           border-radius: 12px;
           font-size: 14px;
           box-sizing: border-box;
+
           span {
             padding: 14px 16px;
             cursor: pointer;
@@ -120,28 +142,34 @@
       }
     }
   }
+
   &--foot {
     margin-top: 120px;
+
     .subtotal {
       font-weight: 600;
       font-size: 12px;
       line-height: 18px;
       margin-bottom: 24px;
+
       span {
         margin-top: 8px;
         display: block;
         font-size: 26px;
       }
     }
+
     .button {
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-top: 1px solid #ebebeb;
       padding: 16px;
+
       .btn-buy {
         width: 150px;
       }
+
       .btn--apply {
         display: flex;
         align-items: center;

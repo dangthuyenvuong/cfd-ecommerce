@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import { Switch, Route, useRouteMatch, NavLink, useParams, useHistory } from "react-router-dom";
+import { Switch, Route, useRouteMatch, NavLink, useParams, useHistory, Link } from "react-router-dom";
 import ListView from "./components/ListView";
 import GridView from "./components/GridView";
 import FilterBar from "./components/FilterBar";
 import Paginate from "../../components/Paginate";
 import Api from "../../helper/Api";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProduct } from "../../actions/productAction";
+import { fetchProduct, loadingProduct } from "../../actions/productAction";
 import { getQueryParam, convertObjToQueryURL } from "../../hooks/queryURL";
+import getQueryString from "./getQueryString";
+
+
+
 export default function Category() {
   let { url } = useRouteMatch();
   // let [categories, setCategories] = useState(null);
@@ -18,21 +22,33 @@ export default function Category() {
   let history = useHistory();
 
   let catID = urlParams?.cat?.replace(/[^0-9]/g, '');
+  let queryUrl = getQueryString(urlParams, { remove: { view: 1 } });
+  let viewGrid = getQueryString(urlParams, { data: { view: 'grid' }, remove: { categories: 1 } });
+  let viewList = getQueryString(urlParams, { data: { view: 'list' }, remove: { categories: 1 } });
 
 
   useEffect(() => {
-    Api('product' + (catID ? `?categories=${catID}` : '')).get()
+    dispatch(loadingProduct())
+    Api('product' + (queryUrl ? `?${queryUrl}` : '')).get()
       .then(res => {
         dispatch(fetchProduct(res))
       })
-  }, [catID])
+  }, [queryUrl])
+
+
+
 
   let categories = useSelector((store: any) => store.categories).list
   const product = useSelector((state: any) => state.product)
 
   if (categories.length === 0) return null;
 
-  let view = getQueryParam().view || 'list'
+  let queryURL = getQueryParam();
+
+  let view = queryURL.view || 'list'
+  let sort = (queryURL.sort || 'price.-1')
+
+  sort = sort.split('.')
 
 
   function sortPrice(flag: number) {
@@ -40,36 +56,45 @@ export default function Category() {
     query.sort = `price.${flag}`
 
     history.push({
-      pathname: window.location.pathname,
       search: '?' + convertObjToQueryURL(query)
     })
   }
+
+
+  let category: any = 'Danh sách sản phẩm'
+  if (catID) {
+    category = categories.find((e: any) => e.id === parseInt(catID));
+    category = category.title;
+  }
+
+
   return (
     <>
       <Breadcrumbs links={[
-        { title: "Homepage", link: "/" },
-        { title: "Category" },
+        { title: "Trang chủ", link: "/" },
+        { title: category },
       ]} />
       <section className="category">
         <div className="container">
           <div className="heading">
-            <h2 className="heading--title">Fruit and vegetables</h2>
+            <h2 className="heading--title">{category}</h2>
             <div className="heading--group">
-              <NavLink to={`${url}?view=grid`} className="heading--item">
+              <span className="label">Thể hiện: </span>
+              <Link to={`${url}?${viewGrid}`} className={`heading--item ${view === 'grid' ? 'active' : ''}`}>
                 <span>
                   <img src="/assets/icon-square.svg" alt="" />
                 </span>
-                <span className="type">Grid view</span>
-              </NavLink>
-              <NavLink exact to={`${url}?view=list`} className="heading--item">
+                <span className="type">Lưới</span>
+              </Link>
+              <Link to={`${url}?${viewList}`} className={`heading--item ${view === 'list' ? 'active' : ''}`}>
                 <span>
                   <img src="/assets/icon-section.svg" alt="" />
                 </span>
-                <span className="type">List view</span>
-              </NavLink>
+                <span className="type">Danh sách</span>
+              </Link>
               <div className="heading--item">
-                <span className="number">117</span>
-                <span className="type">Products</span>
+                <span className="number">{product.paginate?.count}</span>
+                <span className="type">Sản phâm</span>
               </div>
             </div>
           </div>
@@ -77,14 +102,14 @@ export default function Category() {
             <div className="filter--top__group">
               <div className="filter--item">
                 <div className="field">
-                  <input type="radio" id="small" name="size" />
-                  <label htmlFor="small" className="radio" onClick={sortPrice.bind(null, 1)}>
+                  <input type="radio" id="small" name="size" checked={sort[1] == -1} />
+                  <label htmlFor="small" className={`radio ${sort[1] == -1 ? 'active' : ''}`} onClick={sortPrice.bind(null, -1)}>
                     Giá cao
                   </label>
                 </div>
                 <div className="field">
-                  <input type="radio" id="big" name="size" defaultChecked />
-                  <label htmlFor="big" className="radio" onClick={sortPrice.bind(null, -1)}>
+                  <input type="radio" id="big" name="size" checked={sort[1] == 1} />
+                  <label htmlFor="big" className={`radio ${sort[1] == 1 ? 'active' : ''}`} onClick={sortPrice.bind(null, 1)}>
                     Giá thấp
                   </label>
                 </div>
@@ -93,18 +118,27 @@ export default function Category() {
                 <div className="field">
                   <input type="checkbox" id="small" name="size" />
                   <label htmlFor="small" className="checkbox">
-                    Giao nhanh
+                    Khuyến mãi nhiều
                   </label>
-                  <div className="nbm">nbm</div>
+                  {/* <div className="nbm">nbm</div> */}
                 </div>
               </div>
               <div className="filter--item">
                 <div className="field">
                   <input type="checkbox" id="small" name="size" />
                   <label htmlFor="small" className="checkbox">
-                    Chính hãng
+                    Được tin dùng
                   </label>
-                  <div className="nbm">nbm</div>
+                  {/* <div className="nbm">nbm</div> */}
+                </div>
+              </div>
+              <div className="filter--item">
+                <div className="field">
+                  <input type="checkbox" id="small" name="size" />
+                  <label htmlFor="small" className="checkbox">
+                    Hàng chính hãng
+                  </label>
+                  {/* <div className="nbm">nbm</div> */}
                 </div>
               </div>
               <div className="filter--item">
@@ -132,7 +166,7 @@ export default function Category() {
               </div>
             </div>
             <div className="filter--top__applied">
-              <h3>Applied filters:</h3>
+              <h3>Lọc theo:</h3>
               <div className="selected--group">
                 <span className="selected--item">Selected Filter</span>
                 <span className="selected--item">Selected Filter</span>

@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import getQueryString from "../getQueryString";
 import FilterPrice from "./FilterPrice";
 
 const style: { [key in string]: React.CSSProperties } = {
@@ -10,6 +11,11 @@ const style: { [key in string]: React.CSSProperties } = {
 export default function FilterBar(props: { categories: any[] | null }) {
   let { categories } = props;
 
+  let urlParams: any = useParams();
+
+
+
+
   return (
     <div className="filter--bar">
       <div className="filter--bar__item">
@@ -17,7 +23,7 @@ export default function FilterBar(props: { categories: any[] | null }) {
         <ul>
           {
             categories?.map(e => <li key={e._id}>
-              <NavLink to={`/category/${e.slug}`} activeStyle={style.menuActive}>
+              <NavLink to={`${e.slug}?${getQueryString(urlParams, { remove: { categories: 1 } })}`} activeStyle={style.menuActive}>
                 {e.title}
               </NavLink>{" "}
             </li>)

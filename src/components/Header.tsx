@@ -1,8 +1,35 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-export default function Header({setCartState} : any) {
+export default function Header({ setCartState }: any) {
   const categories = useSelector((state: any) => state.categories).list
+
+  let menus = [
+    {
+      title: 'Khuyến mãi',
+      slug: 'khuyen-mai'
+    },
+    {
+      title: 'Được mua nhiều',
+      slug: 'mua-nhieu'
+    },
+    {
+      title: 'Mới nhất',
+      slug: 'moi-nhat'
+    },
+    {
+      title: 'Hấp dẫn',
+      slug: 'hap-dan'
+    },
+    {
+      title: 'Quà tặng',
+      slug: 'qua-tang'
+    },
+    {
+      title: 'Chính sách',
+      slug: 'chinh-sach'
+    }
+  ]
 
   return (
     <>
@@ -46,20 +73,25 @@ export default function Header({setCartState} : any) {
               <Link className="user" to="/login">
                 <img src="/assets/icon-user.svg" alt="user" />
               </Link>
-              <div className="cart" data-item="4" onClick={()=> setCartState(true)} >
+              <div className="cart" data-item="4" onClick={() => setCartState(true)} >
                 <img src="/assets/icon-cart.svg" alt="cart" />
               </div>
             </div>
           </div>
           <div className="header--bottom">
             <ul className="wrap">
-              <li>
-                <span className="title">Bakery</span>
-                <span>
-                  <img src="/assets/icon-down.svg" alt="" />
-                </span>
-              </li>
-              <li>
+              {
+                menus.map((e: any) => (
+                  <li key={e.id}>
+                    <NavLink to={`/category/${e.slug}`} className="title">{e.title}</NavLink>
+                    {/* <span>
+                      <img src="/assets/icon-down.svg" alt="" />
+                    </span> */}
+                  </li>
+                ))
+              }
+
+              {/* <li>
                 <span className="title">Fruit and vegetables</span>
                 <span>
                   <img src="/assets/icon-down.svg" alt="" />
@@ -100,7 +132,7 @@ export default function Header({setCartState} : any) {
                 <span>
                   <img src="/assets/icon-down.svg" alt="" />
                 </span>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

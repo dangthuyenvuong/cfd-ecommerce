@@ -2,49 +2,88 @@
   border-radius: 12px;
   border: 1px solid #d1d1d1;
   padding: 16px;
-  margin-bottom: 48px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
   &--head {
     margin-bottom: 16px;
+    height: 200px;
+    text-align: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
   }
+
+  &--body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
   &--title {
     font-size: 15px;
     line-height: 22px;
+    margin-bottom: 10px;
     font-weight: 600;
-    margin-bottom: 4px;
+
   }
+
   &--desc {
     font-size: 12px;
     line-height: 16px;
     color: #575757;
     margin-bottom: 16px;
   }
+
   &--footer {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .card--price {
+      font-weight: bold;
+    }
   }
-  &--price {
+
+  &--ice {
     font-weight: 600;
     font-size: 18px;
     line-height: 27px;
   }
+
   &--percent {
-      position:absolute;
-      content:'';
-      border-radius: 12px;
-      background-color: #f4f8ec;
-      top:34px;
-      left:40px;
-      width: 54px;
-      height: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      span {
-        font-size: 12px;
-        font-weight: 600;
-        color:#6A983C;
-      }
+    position: absolute;
+    content: '';
+    border-radius: 12px;
+    background-color: rgb(255, 57, 69);
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+
+    span {
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+    }
 
   }
+}
+
+.card--price-promotion {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 14px;
 }

@@ -16,10 +16,10 @@ import { loadCategories } from "./actions/categoriesAction";
 
 import { useDispatch } from "react-redux";
 const routes = [
-  { path: "/category/:cat?", name: "Category", Component: Category },
-  { path: "/product-details", name: "ProductDetails", Component: Details },
-  { path: "/checkout", name: "Check Out", Component: Checkout },
-  { path: "/login", name: "Login", Component: Login },
+  { path: "/the-loai/:cat?", name: "Category", Component: Category },
+  { path: "/chi-tiet", name: "ProductDetails", Component: Details },
+  { path: "/thanh-toan", name: "Check Out", Component: Checkout },
+  { path: "/dang-nhap", name: "Login", Component: Login },
   { path: "/", name: "Home", Component: Home },
 ];
 function App() {

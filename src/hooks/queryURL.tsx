@@ -16,3 +16,10 @@ export function convertObjToQueryURL(data: any) {
         return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
     }).join('&')
 }
+
+
+export function addQueryURL(data: Object) {
+    let query = getQueryParam();
+    query = Object.assign(query, data)
+    return convertObjToQueryURL(query)
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import Card from '../../../components/Card'
 import Filter from './Filter'
 
@@ -19,12 +20,12 @@ export default function Products() {
                                         <li> <a href="#">Pharmacy</a></li>
                                         <li> <a href="#">Baby</a></li>
                                     </ul>
-                                    <div className="btn btn--more">
+                                    <NavLink to="/the-loai/" className="btn btn--more">
                                         <span>More products</span>
                                         <span className="right">
                                             <img src="/assets/icon-right.svg" alt="" />
                                         </span>
-                                    </div>
+                                    </NavLink>
                                 </Filter>
                             </div>
                             <div className="col-md-9">
