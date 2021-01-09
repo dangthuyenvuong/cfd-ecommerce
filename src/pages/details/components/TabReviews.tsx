@@ -4,9 +4,9 @@ export default function TabReviews() {
   return (
     <div className="tab">
       <ul className="tab--title">
-        <li className="active">Description</li>
-        <li>Reviews</li>
-        <li>Questions</li>
+        <li className="active">THÔNG TIN CHI TIẾT</li>
+        <li>KHÁCH HÀNG NHẬN XÉT</li>
+        <li>HỎI, ĐÁP VỀ SẢN PHẨM</li>
       </ul>
       <div className="tab--content">
         <div className="description">

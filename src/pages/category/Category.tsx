@@ -51,9 +51,10 @@ export default function Category() {
   sort = sort.split('.')
 
 
-  function sortPrice(flag: number) {
+  function sortPrice(options: Object) {
     let query = getQueryParam()
-    query.sort = `price.${flag}`
+
+    query.sort = JSON.stringify(options).replace(/[{}"]/g, '').replace(/:/g, '.');
 
     history.push({
       search: '?' + convertObjToQueryURL(query)
@@ -103,26 +104,32 @@ export default function Category() {
               <div className="filter--item">
                 <div className="field">
                   <input type="radio" id="small" name="size" checked={sort[1] == -1} />
-                  <label htmlFor="small" className={`radio ${sort[1] == -1 ? 'active' : ''}`} onClick={sortPrice.bind(null, -1)}>
+                  <label htmlFor="small" className={`radio ${sort[1] == -1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { price: -1 })}>
                     Giá cao
                   </label>
                 </div>
                 <div className="field">
                   <input type="radio" id="big" name="size" checked={sort[1] == 1} />
-                  <label htmlFor="big" className={`radio ${sort[1] == 1 ? 'active' : ''}`} onClick={sortPrice.bind(null, 1)}>
+                  <label htmlFor="big" className={`radio ${sort[1] == 1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { price: 1 })}>
                     Giá thấp
                   </label>
                 </div>
-              </div>
-              <div className="filter--item">
                 <div className="field">
-                  <input type="checkbox" id="small" name="size" />
-                  <label htmlFor="small" className="checkbox">
+                  <input type="radio" id="km" name="size" checked={sort[0] === 'discount_rate'} />
+                  <label htmlFor="big" className={`radio ${sort[0] === 'discount_rate' ? 'active' : ''}`} onClick={sortPrice.bind(null, { discount_rate: -1 })}>
                     Khuyến mãi nhiều
                   </label>
-                  {/* <div className="nbm">nbm</div> */}
                 </div>
               </div>
+              {/* <div className="filter--item">
+                <div className="field">
+                  <input type="checkbox" id="small" name="size" />
+                  <label htmlFor="small" className="checkbox" onClick={sortPrice.bind(null, { discount_rate: -1 })}>
+                    Khuyến mãi nhiều
+                  </label>
+                  <div className="nbm">nbm</div>
+                </div>
+              </div> */}
               <div className="filter--item">
                 <div className="field">
                   <input type="checkbox" id="small" name="size" />

@@ -23,13 +23,13 @@ const style: { [key in string]: React.CSSProperties } = {
   }
 }
 
-export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any, loading?: boolean }) {
+export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any, loading?: boolean, slug: string }) {
   let { price, real_price, name, thumbnail_url, percent, rating_average, stock_item, loading } = props;
 
   return (
     <div className="card--list">
       {
-        loading ? <Skeleton variant="rect" animation="wave" width={160} height={200} /> : <NavLink to="/" className="card--image">
+        loading ? <Skeleton variant="rect" animation="wave" width={160} height={200} /> : <NavLink to={`/chi-tiet/${props.slug}`} className="card--image">
           <img src={thumbnail_url} alt="" />
           {
             percent > 0 && <span className="card--percent">-{percent}%</span>
@@ -40,7 +40,7 @@ export default function CardList(props: { price: any, real_price: any, name: str
       <div className="card--details">
         {
           loading ? <Skeleton variant="rect" height={50} style={{ marginBottom: 10 }} /> : (
-            <h2 className="title"><NavLink to="/">{name}</NavLink></h2>
+            <h2 className="title"><NavLink to={`/chi-tiet/${props.slug}`}>{name}</NavLink></h2>
           )
         }
 
@@ -150,7 +150,7 @@ export default function CardList(props: { price: any, real_price: any, name: str
         <div className="card--price__bot">
           {
             loading ? <><Skeleton variant="text" width="100%" /><Skeleton variant="text" width="100%" /></> : (
-              <NavLink to="/" className="btn btn-buy">
+              <NavLink to={`/chi-tiet/${props.slug}`} className="btn btn-buy">
                 <span>Chi tiết</span>
                 <img src="/assets/right-white.svg" alt="" />
               </NavLink>

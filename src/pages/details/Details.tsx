@@ -1,22 +1,52 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouteMatch } from 'react-router-dom'
+import { loadingProductDetail, productDetailFinish } from '../../actions/productAction'
 import Breadcrumbs from '../../components/Breadcrumbs'
+import Api from '../../helper/Api'
+import { widthProduct } from '../../hoc/withProduct'
 import ProductDetails from './components/ProductDetails'
 import Related from './components/Related'
 
 
 export default function Details() {
+
+    let productID: any = useRouteMatch()
+
+    productID = productID.params.slug?.match(/\d+$/g, '')?.[0] || null;
+    let dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadingProductDetail())
+        if (productID) {
+            Api(`product/${productID}`).get()
+                .then(res => {
+                    dispatch(productDetailFinish(res))
+                })
+
+        }
+    }, [productID])
+
+
+    let product = useSelector((store: any) => store.product);
+
+
     return (
         <>
-            <Breadcrumbs links = {[
-                {title: "Homepage", link : "/"},
-                {title: "Category", link : "/category"},
-                {title: "Carrots"},
+            <Breadcrumbs links={[
+                { title: "Homepage", link: "/" },
+                { title: "Category", link: "/category" },
+                { title: "Carrots" },
             ]}
             />
             <section className="product">
                 <div className="container">
-                    <ProductDetails/>
-                    <Related/>
+                    {
+                        product.detailLoading ?
+                            <ProductDetails loading={true} /> :
+                            widthProduct(ProductDetails, product.detail)
+                    }
+                    <Related />
                 </div>
             </section>
         </>

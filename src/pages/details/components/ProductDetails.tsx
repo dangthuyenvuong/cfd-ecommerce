@@ -1,18 +1,19 @@
 import React from "react";
 import TabReviews from './TabReviews'
-export default function ProductDetails() {
+export default function ProductDetails(props: any) {
+  console.log(props)
   return (
     <div className="row">
       <div className="col-md-6">
         <div className="product--image">
-          <img src="/assets/details1.jpg" alt="" />
-          <img src="/assets/details2.jpg" alt="" />
-          <img src="/assets/details3.jpg" alt="" />
+          {
+            props.images?.map((e: any) => <img key={e.thumbnail_url} src={e.large_url} alt="" />)
+          }
         </div>
       </div>
       <div className="col-md-6">
         <div className="product--details">
-          <h2 className="title">Carrots from Tomissy Farm</h2>
+          <h2 className="title">{props.name}</h2>
           <div className="star--group">
             <img src="/assets/icon-star.svg" alt="" />
             <img src="/assets/icon-star.svg" alt="" />
@@ -22,9 +23,7 @@ export default function ProductDetails() {
             <span>(1 customer review)</span>
           </div>
           <p className="desc">
-            Carrots from Tomissy Farm are one of the best on the market. Tomisso
-            and his family are giving a full love to his Bio products. Tomisso’s
-            carrots are growing on the fields naturally.
+            {props.short_description}
           </p>
           <div className="product--wrap__info">
             <div className="content">
@@ -35,7 +34,7 @@ export default function ProductDetails() {
                 <span className="name">Farm</span>
               </div>
               <div className="info">
-                <span>76645</span>
+                <span>{props.sku}</span>
                 <span>Vegetables</span>
                 <span className="green">In Stock</span>
                 <span>Grocery Tarm Fields</span>
@@ -58,8 +57,14 @@ export default function ProductDetails() {
           </div>
           <div className="product--wrap__btn">
             <div className="price--group">
-              <span className="price">36.23 USD</span>
-              <span className="discount">48.56 USD</span>
+              <span className="price">{props.real_price} VNĐ</span>
+              {
+                props.percent > 0 ? <>
+                  <span className="discount">{props.price} VNĐ</span>
+                  <span className="discount-percent">-{props.percent}%</span>
+                </> : null
+              }
+
             </div>
             <div className="btn--group">
               <div className="quantity">
@@ -74,10 +79,10 @@ export default function ProductDetails() {
             </div>
           </div>
           <div className="wish--list">
-              <img src="/assets/icon-heart-organe.svg" alt="" />
-              <span>Add to wish list</span>
+            <img src="/assets/icon-heart-organe.svg" alt="" />
+            <span>Add to wish list</span>
           </div>
-          <TabReviews/>
+          <TabReviews />
         </div>
       </div>
     </div>
