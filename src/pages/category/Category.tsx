@@ -46,7 +46,7 @@ export default function Category() {
   let queryURL = getQueryParam();
 
   let view = queryURL.view || 'list'
-  let sort = (queryURL.sort || 'price.-1')
+  let sort = (queryURL.sort || 'real_price.-1')
 
   sort = sort.split('.')
 
@@ -104,13 +104,13 @@ export default function Category() {
               <div className="filter--item">
                 <div className="field">
                   <input type="radio" id="small" name="size" checked={sort[1] == -1} />
-                  <label htmlFor="small" className={`radio ${sort[1] == -1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { price: -1 })}>
+                  <label htmlFor="small" className={`radio ${sort[1] == -1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { real_price: -1 })}>
                     Giá cao
                   </label>
                 </div>
                 <div className="field">
                   <input type="radio" id="big" name="size" checked={sort[1] == 1} />
-                  <label htmlFor="big" className={`radio ${sort[1] == 1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { price: 1 })}>
+                  <label htmlFor="big" className={`radio ${sort[1] == 1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { real_price: 1 })}>
                     Giá thấp
                   </label>
                 </div>

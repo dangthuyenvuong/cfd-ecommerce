@@ -10,7 +10,7 @@ const style: { [key in string]: React.CSSProperties } = {
     position: 'relative'
   },
   ratingValue: {
-    background: 'url(/assets/icon-star-black.svg) repeat-x',
+    background: 'url(/assets/icon-star.svg) repeat-x',
     height: 20,
     position: 'absolute',
     backgroundSize: 17,
@@ -18,12 +18,17 @@ const style: { [key in string]: React.CSSProperties } = {
   },
   ratingNumber: {
     position: 'absolute',
-    right: -25,
-    top: 2
+    left: '110%',
+    top: 2,
+    whiteSpace: 'nowrap'
+  },
+  reviewCount: {
+    fontSize: 14,
+    color: 'gray'
   }
 }
 
-export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any, loading?: boolean, slug: string }) {
+export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any, loading?: boolean, slug: string, review_count: number, quanty?: any }) {
   let { price, real_price, name, thumbnail_url, percent, rating_average, stock_item, loading } = props;
 
   return (
@@ -49,7 +54,7 @@ export default function CardList(props: { price: any, real_price: any, name: str
           loading ? <Skeleton variant="rect" width="50%" /> : (
             <div className="start--group" style={style.rating}>
               <div className="rating-value" style={{ ...style.ratingValue, width: `${rating_average / 5 * 100}%` }}></div>
-              <span style={style.ratingNumber}>{rating_average}</span>
+              <div style={style.ratingNumber}>{rating_average} <span style={style.reviewCount}>({props.review_count})</span></div>
 
             </div>
           )
@@ -116,7 +121,7 @@ export default function CardList(props: { price: any, real_price: any, name: str
             {
               loading ? <Skeleton variant="rect" width={100} height={15} style={{ marginTop: 10 }} /> : (
                 <li>
-                  <span className="green">{stock_item?.qty}</span>
+                  <span className="green">{props.quanty}</span>
                 </li>
               )
             }

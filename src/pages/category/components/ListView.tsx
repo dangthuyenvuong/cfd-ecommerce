@@ -12,8 +12,8 @@ export default function ListView(props: { product: [] }) {
     return (
         <>
             {
-                productStore.loading ? [...Array(15)].map(e => (
-                    <CardList {...e} loading={true} />
+                productStore.loading ? [...Array(15)].map((e, i) => (
+                    <CardList {...e} key={i} loading={true} />
                 ))
                     : product.map((e: any) => <React.Fragment key={e._id}>{widthProduct(CardList, e)}</React.Fragment>)
 
