@@ -86,9 +86,8 @@
         position: relative;
         cursor: pointer;
 
-        &::after {
+        .number {
           position: absolute;
-          content: attr(data-item);
           font-size: 12px;
           color: #fff;
           font-weight: 600;

@@ -1,6 +1,8 @@
 import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { cartAddItem } from "../actions/cartAction";
 
 const style: { [key in string]: React.CSSProperties } = {
   rating: {
@@ -30,6 +32,10 @@ const style: { [key in string]: React.CSSProperties } = {
 
 export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any, loading?: boolean, slug: string, review_count: number, quanty?: any }) {
   let { price, real_price, name, thumbnail_url, percent, rating_average, stock_item, loading } = props;
+
+
+  const dispatch = useDispatch()
+
 
   return (
     <div className="card--list">
@@ -155,10 +161,10 @@ export default function CardList(props: { price: any, real_price: any, name: str
         <div className="card--price__bot">
           {
             loading ? <><Skeleton variant="text" width="100%" /><Skeleton variant="text" width="100%" /></> : (
-              <NavLink to={`/chi-tiet/${props.slug}`} className="btn btn-buy">
-                <span>Chi tiết</span>
+              <div className="btn btn-buy" onClick={dispatch.bind(null, cartAddItem(props))}>
+                <span>Thêm vào giỏ hàng</span>
                 <img src="/assets/right-white.svg" alt="" />
-              </NavLink>
+              </div>
             )
           }
 

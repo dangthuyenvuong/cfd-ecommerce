@@ -1,10 +1,29 @@
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 const patternEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const patternPhone = /(03|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
 const patternURL = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/;
 
-export default function useForm(initValue : any, rules :any){
+
+/**
+ * 
+ * @param initValue 
+ * @param rules 
+ * @returns
+ * Submit: True if not error, false have error
+ */
+
+
+export default function useForm(initValue: any, rules: {
+  validate: any,
+  message?: any
+}): {
+  data: any,
+  inputChange: ChangeEventHandler,
+  errors: any,
+  setErrors: Function,
+  Submit: () => Boolean
+} {
 
   for (let i in initValue) {
     if (initValue[i] === null) initValue[i] = "";
@@ -13,15 +32,15 @@ export default function useForm(initValue : any, rules :any){
   let [form, setForm] = useState(initValue);
   let [errors, setErrors] = useState({});
 
-  function inputChange(e : any) {
+  function inputChange(e: any) {
     setForm({
       ...form,
       [e.target.name]: e.target.value.trim(),
     });
   }
-  function Submit() {
+  function Submit(): Boolean {
     let { validate, message } = rules;
-    let errorObj : any = {};
+    let errorObj: any = {};
     for (let i in validate) {
       if (i in form) {
         if (validate[i].required) {
@@ -44,7 +63,7 @@ export default function useForm(initValue : any, rules :any){
       }
     }
     setErrors(errorObj);
-    return Object.keys(errorObj).length > 0;
+    return Object.keys(errorObj).length === 0;
   }
   return {
     data: form,

@@ -24,7 +24,6 @@ const routes = [
 ];
 function App() {
 
-  let [cartState, setCartState] = useState(false);
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,8 +36,8 @@ function App() {
 
   return (
     <Router>
-      <Cart cartState={cartState} setCartState={setCartState} />
-      <Header setCartState={setCartState} />
+      <Cart />
+      <Header />
       <Switch>
         {routes.map(({ path, Component }) => (
           <Route key={path} path={path}>

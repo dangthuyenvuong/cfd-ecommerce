@@ -193,20 +193,19 @@ img {
   top: 0;
   right: 0;
   width: 400px;
+  background: transparent;
   z-index: 2;
-  background: #fff;
   height: 100vh;
-  transform: translateX(100%);
-  transition: transform 0.5s ease-in;
+  transition: all 0.5s ease-in;
   width: 100vw;
   display: flex;
-  background: #0000008c;
 
-  &.is-open {
-    transform: translateX(0);
-  }
+  pointer-events: none;
 
   .cart {
+    transition: all 0.5s ease-in;
+    pointer-events: initial;
+    transform: translateX(100%);
     width: 400px;
     margin-left: auto;
     height: 100%;
@@ -214,6 +213,16 @@ img {
 
     &--body {
       height: unset;
+    }
+  }
+
+  &.is-open {
+    background: #0000008c;
+    pointer-events: unset;
+
+    .cart {
+      transform: translateX(0);
+
     }
   }
 }

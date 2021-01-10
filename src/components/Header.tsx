@@ -1,8 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
+import { openCart } from "../actions/cartAction";
 
-export default function Header({ setCartState }: any) {
+export default function Header() {
   const categories = useSelector((state: any) => state.categories).list
+  const cart = useSelector((state: any) => state.cart)
+  const dispatch = useDispatch()
 
   let menus = [
     {
@@ -70,19 +73,23 @@ export default function Header({ setCartState }: any) {
               </div>
             </div>
             <div className="info">
-              <Link className="user" to="/login">
+              <Link className="user" to="/dang-nhap">
                 <img src="/assets/icon-user.svg" alt="user" />
               </Link>
-              <div className="cart" data-item="4" onClick={() => setCartState(true)} >
+              <div className="cart" onClick={dispatch.bind(null, openCart())} >
                 <img src="/assets/icon-cart.svg" alt="cart" />
+                {
+                  cart.list.length > 0 && <span className="number">{cart.list.length}</span>
+                }
+
               </div>
             </div>
           </div>
           <div className="header--bottom">
             <ul className="wrap">
               {
-                menus.map((e: any) => (
-                  <li key={e.id}>
+                menus.map((e: any, i) => (
+                  <li key={i}>
                     <NavLink to={`/category/${e.slug}`} className="title">{e.title}</NavLink>
                     {/* <span>
                       <img src="/assets/icon-down.svg" alt="" />
