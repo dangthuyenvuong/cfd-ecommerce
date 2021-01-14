@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 
   &--head {
     margin-bottom: 16px;
