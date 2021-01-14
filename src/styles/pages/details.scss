@@ -180,6 +180,17 @@
       margin-top: 48px;
 
       .description {
+        line-height: 30px;
+
+        p {
+          margin-bottom: 20px;
+        }
+
+        img {
+          display: block;
+          margin: 0 auto 20px auto;
+        }
+
         &--top {
           .item {
             margin-bottom: 32px;

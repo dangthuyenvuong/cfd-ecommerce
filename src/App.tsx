@@ -9,7 +9,8 @@ import Footer from "./components/Footer";
 import Category from "./pages/category/Category";
 import Details from "./pages/details/Details";
 import Checkout from "./pages/checkout/Checkout";
-import Cart from "./components/Cart";
+import Profile from "./pages/profile";
+import { Cart } from "./components/Cart";
 import Login from "./pages/login/Login";
 import Api from "./helper/Api";
 import { loadCategories } from "./actions/categoriesAction";
@@ -20,6 +21,7 @@ const routes = [
   { path: "/chi-tiet/:slug", name: "ProductDetails", Component: Details },
   { path: "/thanh-toan", name: "Check Out", Component: Checkout },
   { path: "/dang-nhap", name: "Login", Component: Login },
+  { path: "/thong-tin-ca-nhan", name: "Login", Component: Profile },
   { path: "/", name: "Home", Component: Home },
 ];
 function App() {

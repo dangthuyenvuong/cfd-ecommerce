@@ -22,7 +22,7 @@ export default function getQueryString(urlParams: any, props?: { data?: Object, 
     }
 
     if (!queryString.sort) {
-        queryString.sort = 'price.-1'
+        queryString.sort = 'real_price.-1'
     }
 
 

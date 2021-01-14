@@ -12,7 +12,7 @@ export default function Checkout() {
       <Breadcrumbs links={[
         { title: "Homepage", link: "/" },
         { title: "Checkout page" },
-        ]} />
+      ]} />
       <section className="checkout">
         <div className="container">
           <div className="row">
@@ -26,6 +26,9 @@ export default function Checkout() {
             </div>
             <div className="col-md-5">
               <Order />
+              <div className="btn btn-buy" style={{ marginTop: 10, marginLeft: 'auto' }}>
+                <span>Hoàn tất đặt hàng</span>
+              </div>
             </div>
           </div>
         </div>

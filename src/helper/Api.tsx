@@ -88,6 +88,10 @@ export default (url: string) => {
       return callApi(...params);
     },
     post: (data: any) => {
+      if (typeof data.body === 'object') {
+        data.body = JSON.stringify(data.body)
+      }
+
       let params: [input: RequestInfo, init?: RequestInit] = [
         domain + url,
         { headers, ...data, method: "POST" },

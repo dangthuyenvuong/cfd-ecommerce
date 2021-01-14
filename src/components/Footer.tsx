@@ -7,11 +7,11 @@ export default function Footer() {
                 <div className="container">
                     <div className="footer--top">
                         <div className="footer--top__col">
-                            <h2>Get in touch</h2>
+                            <h2>Liên hệ</h2>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Careers</a></li>
-                                <li><a href="#">Press Releases</a></li>
+                                <li><a href="#">Về chúng tôi</a></li>
+                                <li><a href="#">Tuyển dụng</a></li>
+                                <li><a href="#">Thông cáo báo chí</a></li>
                                 <li><a href="#">Blog</a></li>
                             </ul>
                         </div>
@@ -26,27 +26,27 @@ export default function Footer() {
                             </ul>
                         </div>
                         <div className="footer--top__col">
-                            <h2>Earnings</h2>
+                            <h2>Đại lý</h2>
                             <ul>
-                                <li><a href="#">Become an Affiliate</a></li>
-                                <li><a href="#">Advertise your product</a></li>
-                                <li><a href="#">Sell on Market</a></li>
+                                <li><a href="#">Trở thành đại lý</a></li>
+                                <li><a href="#">Liên hệ quảng cáo</a></li>
+                                <li><a href="#">Dành cho người bán</a></li>
                             </ul>
                         </div>
                         <div className="footer--top__col">
-                            <h2>Account</h2>
+                            <h2>Tài khoản</h2>
                             <ul>
-                                <li><a href="#">Your account</a></li>
-                                <li><a href="#">Returns Centre</a></li>
-                                <li><a href="#">100 % purchase protection</a></li>
-                                <li><a href="#">Chat with us</a></li>
-                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Tài khoản của bạn</a></li>
+                                <li><a href="#">Chính sách hoàn trả</a></li>
+                                <li><a href="#">Trung tâm bảo hành</a></li>
+                                <li><a href="#">Chat trực tiếp</a></li>
+                                <li><a href="#">Giúp đỡ</a></li>
                             </ul>
                         </div>
                     </div>
                     <div className="footer--tags">
                         <h2 className="title-tags">
-                            Product tags
+                            Tìm kiếm nhiều
                         </h2>
                         <div className="tags">
                             <span className="tag">Beans</span>
@@ -70,7 +70,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="footer--copyright">
-                         Copyright © 2020 petrbilek.com
+                        Copyright © 2020 petrbilek.com
                     </div>
                 </div>
             </div>

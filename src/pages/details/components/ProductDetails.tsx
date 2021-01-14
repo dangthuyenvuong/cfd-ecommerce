@@ -1,27 +1,21 @@
 import React from "react";
+import RatingStar from "../../../components/RatingStar";
 import TabReviews from './TabReviews'
+import Flickity from 'react-flickity-component'
+import Carousel from "./Carousel";
 export default function ProductDetails(props: any) {
   console.log(props)
   return (
     <div className="row">
       <div className="col-md-6">
         <div className="product--image">
-          {
-            props.images?.map((e: any) => <img key={e.thumbnail_url} src={e.large_url} alt="" />)
-          }
+          <Carousel images={props.images} />
         </div>
       </div>
       <div className="col-md-6">
         <div className="product--details">
           <h2 className="title">{props.name}</h2>
-          <div className="star--group">
-            <img src="/assets/icon-star.svg" alt="" />
-            <img src="/assets/icon-star.svg" alt="" />
-            <img src="/assets/icon-star.svg" alt="" />
-            <img src="/assets/icon-star.svg" alt="" />
-            <img src="/assets/icon-star-none.svg" alt="" />
-            <span>(1 customer review)</span>
-          </div>
+          <RatingStar review_count={props.review_count} rating_average={props.rating_average} />
           <p className="desc">
             {props.short_description}
           </p>
@@ -57,10 +51,10 @@ export default function ProductDetails(props: any) {
           </div>
           <div className="product--wrap__btn">
             <div className="price--group">
-              <span className="price">{props.real_price} VNĐ</span>
+              <span className="price">{props.real_price_str} VNĐ</span>
               {
                 props.percent > 0 ? <>
-                  <span className="discount">{props.price} VNĐ</span>
+                  <span className="discount">{props.price_str} VNĐ</span>
                   <span className="discount-percent">-{props.percent}%</span>
                 </> : null
               }
@@ -82,9 +76,10 @@ export default function ProductDetails(props: any) {
             <img src="/assets/icon-heart-organe.svg" alt="" />
             <span>Add to wish list</span>
           </div>
-          <TabReviews />
         </div>
       </div>
+      <TabReviews {...props} />
+
     </div>
   );
 }

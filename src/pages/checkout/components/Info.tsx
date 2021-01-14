@@ -1,17 +1,29 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectShippingOption } from "../../../actions/cartAction";
+import { FormatNumber } from "../../../helper";
 
 export default function Info() {
+  let dispatch = useDispatch()
+  const cart = useSelector((state: any) => state.cart)
+  function shippingSelect(e: any) {
+    dispatch(selectShippingOption({
+      price: parseInt(e.target.getAttribute('data-frice')),
+      option: e.target.value
+    }))
+  }
+  console.log(cart)
   return (
     <>
       <div className="step">
-        <h3 className="step--title">Billing info</h3>
+        <h3 className="step--title">Thông tin đơn hàng</h3>
         <div className="step--required">
-          <p>Please enter your billing info</p>
-          <p>Step 1 of 5</p>
+          <p>Xin vui lòng nhập đầy đủ thông tin ở dưới</p>
+          <p>Bước 1 (5)</p>
         </div>
         <div className="field--wrap">
           <div className="custom-field">
-            <label htmlFor="firstName">First name</label>
+            <label htmlFor="firstName">Họ và tên</label>
             <input
               className="text"
               type="text"
@@ -20,27 +32,7 @@ export default function Info() {
             />
           </div>
           <div className="custom-field">
-            <label htmlFor="lastName">Last name</label>
-            <input
-              className="text"
-              type="text"
-              name="lastName"
-              placeholder="Last name"
-            />
-          </div>
-        </div>
-        <div className="field--wrap">
-          <div className="custom-field">
-            <label htmlFor="email">Email address</label>
-            <input
-              className="text"
-              type="text"
-              name="email"
-              placeholder="Email address"
-            />
-          </div>
-          <div className="custom-field">
-            <label htmlFor="phone">Phone number</label>
+            <label htmlFor="phone">Số điện thoại</label>
             <input
               className="text"
               type="text"
@@ -51,7 +43,19 @@ export default function Info() {
         </div>
         <div className="field--wrap">
           <div className="custom-field">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="email">Địa chỉ email</label>
+            <input
+              className="text"
+              type="text"
+              name="email"
+              placeholder="Email address"
+            />
+          </div>
+
+        </div>
+        <div className="field--wrap">
+          <div className="custom-field" style={{ width: '100%' }}>
+            <label htmlFor="address">Địa chỉ</label>
             <input
               className="text"
               type="text"
@@ -63,41 +67,41 @@ export default function Info() {
         <div className="field--wrap">
           <div className="custom-field--checkbox field">
             <input type="checkbox" name="checkShip" />
-            <span>Ship to a different address?</span>
+            <span>Giao tới điạ chỉ khác?</span>
           </div>
         </div>
       </div>
       <div className="step">
-      <h3 className="step--title">Billing method</h3>
+        <h3 className="step--title">Phương thức giao hàng</h3>
         <div className="step--required">
-          <p>Please enter your payment method</p>
-          <p>Step 2 of 5</p>
+          <p>Vui lòng chọn phương giao hàng bạn muốn</p>
+          <p>Bước 2 (5)</p>
         </div>
-        <div className="field--wrap bg-grey" style={{marginBottom:16}}>
-            <div className="field">
-                <input type="radio" id="fedex" name="billing-method"/>
-                <label htmlFor="fedex" className="radio">FedEx</label>
-            </div>
-            <div className="additional">
-                <span className="green"> + 32 USD</span>
-                <span className="name">Addition price</span>
-            </div>
-            <div className="icon">
-                <img src="/assets/fedex.svg" alt=""/>
-            </div>
+        <div className="field--wrap bg-grey" style={{ marginBottom: 16 }}>
+          <div className="field">
+            <input type="radio" id="fedex" name="billing-method" onClick={shippingSelect} data-frice={15000} value="giao_thuong" defaultChecked={cart.shippingSelected === 'giao_thuong'} />
+            <label htmlFor="fedex" className="radio">Giao thường</label>
+          </div>
+          <div className="additional">
+            <span className="green"> + {FormatNumber(15000)}VNĐ</span>
+            <span className="name">Phí ship</span>
+          </div>
+          <div className="icon">
+            <img src="/assets/fedex.svg" alt="" />
+          </div>
         </div>
         <div className="field--wrap bg-grey">
-            <div className="field">
-                <input type="radio" id="dhl" name="billing-method"/>
-                <label htmlFor="dhl" className="radio">DHL</label>
-            </div>
-            <div className="additional">
-                <span className="green"> + 15 USD</span>
-                <span className="name">Addition price</span>
-            </div>
-            <div className="icon">
-                <img src="/assets/dhl.svg" alt=""/>
-            </div>
+          <div className="field">
+            <input type="radio" id="dhl" name="billing-method" onClick={shippingSelect} data-frice={45000} value="giao_nhanh" defaultChecked={cart.shippingSelected === 'giao_nhanh'} />
+            <label htmlFor="dhl" className="radio">Giao hàng nhanh</label>
+          </div>
+          <div className="additional">
+            <span className="green"> + {FormatNumber(45000)}VNĐ</span>
+            <span className="name">Phí ship</span>
+          </div>
+          <div className="icon">
+            <img src="/assets/dhl.svg" alt="" />
+          </div>
         </div>
       </div>
     </>

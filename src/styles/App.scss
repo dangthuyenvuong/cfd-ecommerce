@@ -81,6 +81,10 @@ img {
   }
 }
 
+.flickity-viewport {
+  overflow: hidden;
+}
+
 .field {
   padding: 6px 16px;
   display: flex;
@@ -90,8 +94,14 @@ img {
   input[type="radio"] {
     display: none;
 
-    &:checked {
-      +.radio::before {
+    // &[checked] {
+    //   +.radio::before {
+    //     border: 6px solid #6a983c;
+    //     background-color: #fff;
+    //   }
+    // }
+    +label {
+      &.active::before {
         border: 6px solid #6a983c;
         background-color: #fff;
       }
@@ -206,7 +216,6 @@ img {
     transition: all 0.5s ease-in;
     pointer-events: initial;
     transform: translateX(100%);
-    width: 400px;
     margin-left: auto;
     height: 100%;
     background: white;

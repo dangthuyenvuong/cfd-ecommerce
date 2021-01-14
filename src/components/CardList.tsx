@@ -3,6 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { cartAddItem } from "../actions/cartAction";
+import RatingStar from "./RatingStar";
 
 const style: { [key in string]: React.CSSProperties } = {
   rating: {
@@ -30,10 +31,9 @@ const style: { [key in string]: React.CSSProperties } = {
   }
 }
 
-export default function CardList(props: { price: any, real_price: any, name: string, thumbnail_url: string, percent: number, rating_average: number, stock_item: any, loading?: boolean, slug: string, review_count: number, quanty?: any }) {
-  let { price, real_price, name, thumbnail_url, percent, rating_average, stock_item, loading } = props;
+export default function CardList(props: any) {
 
-
+  let { loading, thumbnail_url, percent, name } = props;
   const dispatch = useDispatch()
 
 
@@ -57,13 +57,7 @@ export default function CardList(props: { price: any, real_price: any, name: str
 
         {/* <div className="desc">Space for a small product description</div> */}
         {
-          loading ? <Skeleton variant="rect" width="50%" /> : (
-            <div className="start--group" style={style.rating}>
-              <div className="rating-value" style={{ ...style.ratingValue, width: `${rating_average / 5 * 100}%` }}></div>
-              <div style={style.ratingNumber}>{rating_average} <span style={style.reviewCount}>({props.review_count})</span></div>
-
-            </div>
-          )
+          loading ? <Skeleton variant="rect" width="50%" /> : <RatingStar rating_average={props.rating_average} review_count={props.review_count} />
         }
 
         <div className="details">
@@ -141,9 +135,9 @@ export default function CardList(props: { price: any, real_price: any, name: str
         {
           loading ? <Skeleton variant="rect" height="50" style={{ marginBottom: 10 }} /> : (
             <div className="card--price__top">
-              <p className="price">{real_price} vnđ</p>
+              <p className="price">{props.real_price_str} vnđ</p>
               {
-                percent > 0 && <p className="discount">{price}</p>
+                percent > 0 && <p className="discount">{props.price_str}</p>
               }
 
             </div>

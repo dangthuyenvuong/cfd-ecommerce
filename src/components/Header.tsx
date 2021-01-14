@@ -5,6 +5,7 @@ import { openCart } from "../actions/cartAction";
 export default function Header() {
   const categories = useSelector((state: any) => state.categories).list
   const cart = useSelector((state: any) => state.cart)
+  const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
 
   let menus = [
@@ -40,14 +41,14 @@ export default function Header() {
         <div className="container">
           <div className="header--top">
             <ul className="contact">
-              <li>Chat with us</li>
+              <li>Liên hệ</li>
               <li>+420 336 775 664</li>
               <li>info@freshnesecom.com</li>
             </ul>
             <ul className="about">
               <li>Blog</li>
-              <li>About us</li>
-              <li>Careers</li>
+              <li>Về chúng tôi</li>
+              <li>Tuyển dụng</li>
             </ul>
           </div>
           <div className="header--mid">
@@ -57,7 +58,7 @@ export default function Header() {
             <div className="search">
               <div className="search-category">
                 <div className="head">
-                  <span className="title">All categories</span>
+                  <span className="title">Tất cả</span>
                   <span className="arrow">
                     <img src="/assets/icon-down.svg" alt="" />
                   </span>
@@ -66,20 +67,20 @@ export default function Header() {
               <input
                 className="search-input"
                 type="text"
-                placeholder="Search products, categories..."
+                placeholder="Tìm kiếm sản phẩm, thể loại"
               />
               <div className="search-icon">
                 <img src="/assets/icon-search.svg" alt="search" />
               </div>
             </div>
             <div className="info">
-              <Link className="user" to="/dang-nhap">
+              <Link className="user" to={user.login ? '/thong-tin-ca-nhan' : '/dang-nhap'}>
                 <img src="/assets/icon-user.svg" alt="user" />
               </Link>
               <div className="cart" onClick={dispatch.bind(null, openCart())} >
                 <img src="/assets/icon-cart.svg" alt="cart" />
                 {
-                  cart.list.length > 0 && <span className="number">{cart.list.length}</span>
+                  cart.total > 0 && <span className="number">{cart.total}</span>
                 }
 
               </div>

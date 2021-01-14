@@ -1,4 +1,7 @@
+import { useDispatch, useSelector } from "react-redux";
 import useForm from "../../hooks/useForm";
+import { userLogin } from '../../actions/userAction'
+import { Redirect } from "react-router-dom";
 
 const constStyle: { [key in string]: React.CSSProperties } = {
 
@@ -6,6 +9,9 @@ const constStyle: { [key in string]: React.CSSProperties } = {
     color: 'red',
     textAlign: 'left',
     marginTop: -15
+  },
+  formError: {
+    color: 'red'
   }
 
 }
@@ -32,11 +38,16 @@ const Login = () => {
     }
   })
 
+  const dispatch = useDispatch()
+  let user = useSelector((store: any) => store.user)
+
   function _login() {
     if (Submit()) {
-
+      dispatch(userLogin(data))
     }
   }
+
+  if (user.login) return <Redirect to="/" />
 
   return (
     <div className="login">
@@ -48,6 +59,9 @@ const Login = () => {
           <form action="index.html">
             <img src="/assets/avatar.svg" />
             <h2 className="title">Chào mừng bạn quay lại</h2>
+            {
+              user.error && <p className="error-text" style={constStyle.formError}>{user.error}</p>
+            }
             <div className="input-div one">
               <div className="i">
                 <i className="fas fa-user" />

@@ -7,15 +7,15 @@ export function widthProduct(WrapComponent: JSX.Element | any, data: any) {
 
     let percent = 100 - Math.round(real_price / price * 100)
 
-    price = new Intl.NumberFormat('vn', { maximumFractionDigits: 3 }).format(price)
-    real_price = new Intl.NumberFormat('vn', { maximumFractionDigits: 3 }).format(real_price)
+    let price_str = new Intl.NumberFormat('vn', { maximumFractionDigits: 3 }).format(price)
+    let real_price_str = new Intl.NumberFormat('vn', { maximumFractionDigits: 3 }).format(real_price)
     console.log(new Intl.NumberFormat('vn').format(stock_item.qty))
     stock_item = Object.assign(stock_item, {})
     stock_item.qty = new Intl.NumberFormat('vn').format(stock_item.qty | 0)
     let props: any = {
         ...data,
-        real_price,
-        price,
+        price_str,
+        real_price_str,
         percent,
         quanty: new Intl.NumberFormat('vn').format(stock_item.qty)
     }

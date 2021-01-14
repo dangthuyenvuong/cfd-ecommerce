@@ -1,9 +1,12 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
 import Banner from './Banner'
 import Filter from './Filter'
 
 export default function CategoryMenu() {
+    const categories = useSelector((state: any) => state.categories)
+
     return (
         <>
             <section className="section">
@@ -12,16 +15,16 @@ export default function CategoryMenu() {
                         <div className="row">
                             <div className="col-md-3">
                                 <Filter>
-                                    <h2 className="filter--title">Category menu</h2>
+                                    <h2 className="filter--title">Thể loại</h2>
                                     <ul className="filter--link">
-                                        <li> <a href="#">Bakery</a></li>
-                                        <li> <a href="#">Fruit and vegetables</a></li>
-                                        <li> <a href="#">Meat and fish</a></li>
-                                        <li> <a href="#">Drinks</a></li>
-                                        <li> <a href="#">Kitchen</a></li>
+                                        {
+                                            categories.list.filter((e: any, i: number) => i < 5).map((e: any) => (
+                                                <li> <Link to={`/the-loai/${e.slug}`}>{e.title}</Link></li>
+                                            ))
+                                        }
                                     </ul>
                                     <NavLink to="/the-loai/" className="btn btn--more">
-                                        <span>More categories</span>
+                                        <span>Xem thêm</span>
                                         <span className="right">
                                             <img src="/assets/icon-right.svg" alt="" />
                                         </span>

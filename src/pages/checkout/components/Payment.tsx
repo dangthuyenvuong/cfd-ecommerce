@@ -1,25 +1,36 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { cartAddItem, selectPayment } from "../../../actions/cartAction";
 
 export default function Payment() {
+  const dispatch = useDispatch()
+
+  function paymentSelect(e: any) {
+    dispatch(selectPayment(e.target.value))
+  }
+
+  const cart = useSelector((state: any) => state.cart)
   return (
     <>
       <div className="step">
-        <h3 className="step--title">Payment method</h3>
+        <h3 className="step--title">Hình thức thanh toán</h3>
         <div className="step--required">
-          <p>Please enter your payment method</p>
-          <p>Step 3 of 5</p>
+          <p>Vui lòng chọn 1 trong các hình thức thanh toán bên dưới</p>
+          <p>Bước 3 (5)</p>
         </div>
         <div className="wrap">
           <div className="field--top">
             <div className="field--wrap">
-              <div className="field" style={{paddingLeft:0}}>
+              <div className="field" style={{ paddingLeft: 0 }}>
                 <input
                   type="radio"
-                  id="creditCard"
-                  name="billing-method"
-                  defaultChecked
+                  name="payment-method"
+                  id="payment1"
+                  value="creditCard"
+                  defaultChecked={cart.paymentMethod === 'creditCard'}
+                  onClick={paymentSelect}
                 />
-                <label htmlFor="creditCard" className="radio">
+                <label htmlFor="payment1" className="radio">
                   Credit card
                 </label>
               </div>
@@ -72,38 +83,44 @@ export default function Payment() {
             </div>
           </div>
         </div>
-        <div className="field--wrap bg-grey" style={{marginBottom:"16px"}}>
-              <div className="field">
-                <input
-                  type="radio"
-                  id="creditCard"
-                  name="billing-method"
-                  defaultChecked
-                />
-                <label htmlFor="creditCard" className="radio">
-                  PayPal
+        <div className="field--wrap bg-grey" style={{ marginBottom: "16px" }}>
+          <div className="field">
+            <input
+              type="radio"
+              name="payment-method"
+              id="payment2"
+              value="paypal"
+              defaultChecked={cart.paymentMethod === 'paypal'}
+              onClick={paymentSelect}
+
+            />
+            <label htmlFor="payment2" className="radio">
+              PayPal
                 </label>
-              </div>
-              <div className="icon">
-                <img src="/assets/paypal.svg" alt="" />
-              </div>
-            </div>
+          </div>
+          <div className="icon">
+            <img src="/assets/paypal.svg" alt="" />
+          </div>
+        </div>
         <div className="field--wrap bg-grey">
-              <div className="field">
-                <input
-                  type="radio"
-                  id="creditCard"
-                  name="billing-method"
-                  defaultChecked
-                />
-                <label htmlFor="creditCard" className="radio">
-                  Bitcoin
+          <div className="field">
+            <input
+              type="radio"
+              name="payment-method"
+              id="payment3"
+              value="bitcoin"
+              defaultChecked={cart.paymentMethod === 'bitcoin'}
+              onClick={paymentSelect}
+
+            />
+            <label htmlFor="payment3" className="radio">
+              Bitcoin
                 </label>
-              </div>
-              <div className="icon">
-                <img src="/assets/bitcoin.svg" alt="" />
-              </div>
-            </div>
+          </div>
+          <div className="icon">
+            <img src="/assets/bitcoin.svg" alt="" />
+          </div>
+        </div>
       </div>
     </>
   );

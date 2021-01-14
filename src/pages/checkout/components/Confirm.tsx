@@ -4,40 +4,37 @@ export default function Confirm() {
   return (
     <>
       <div className="step">
-        <h3 className="step--title">Confirmation</h3>
+        <h3 className="step--title">Xác nhận thông tin</h3>
         <div className="step--required">
           <p>
-            We are getting to the end. Just few clicks and your order si ready!
+            Còn 1 bước cuối nữa thôi! Vui lòng xác nhận những thông tin phía trên là hoàn toàn chính xác.
           </p>
-          <p>Step 5 of 5</p>
+          <p>Bước 5 (5)</p>
         </div>
         <div className="field--wrap">
           <div className="custom-field ">
             <div className="custom-field--checkbox field">
               <input type="checkbox" name="checkMarketing" />
               <span>
-                I agree with sending an Marketing and newsletter emails. No
-                spam, promissed!
+                Tôi muốn gửi email khi có sản phẩm hoặc khuyến mãi mới. Không spam, tôi xin hứa!
               </span>
             </div>
             <div className="custom-field--checkbox field">
               <input type="checkbox" name="checkAgree" />
               <span>
-                I agree with our terms and conditions and privacy policy.
+                Tôi đồng ý với chính sách và điều kiện bảo hành của công ty bạn.
               </span>
             </div>
           </div>
         </div>
-        <div className="btn btn-buy">
-            <span>Complete order</span>
-        </div>
+
         <div className="security">
-            <div className="security--image">
-                <img src="/assets/security.svg" alt=""/>
-            </div>
-            <div className="security--des">
-                <span>All your data are safe</span>
-                We are using the most advanced security to provide you the best experience ever.
+          <div className="security--image">
+            <img src="/assets/security.svg" alt="" />
+          </div>
+          <div className="security--des">
+            <span>Tất cả dữ liệu của bạn sẽ được bảo mật tuyệt đối</span>
+                Chúng tôi sử dụng quảng cáo để nâng cao trãi nghiệm của bạn và hoàn toàn bảo mật không chia sẽ cho bất kì bên thứ 3 nào.
             </div>
         </div>
       </div>

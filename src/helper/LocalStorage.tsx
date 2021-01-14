@@ -3,18 +3,18 @@ import Hook from "./Hook";
 
 
 export default {
-    get: (name : string) => {
-        try{
-            let data = JSON.parse(localStorage.getItem(name) || '{}');
+    get: (name: string) => {
+        try {
+            let data = JSON.parse(localStorage.getItem(name) || 'null');
 
             Hook.doAction('get_localStorage_' + name, data);
             return data
-        }catch(err){
+        } catch (err) {
             return null;
         }
     },
-    set: (name : string, value : string) =>{
-        if(typeof value !== undefined){
+    set: (name: string, value: string) => {
+        if (typeof value !== undefined) {
             localStorage.setItem(name, JSON.stringify(value))
             Hook.doAction('setLocalStorage_' + name, value);
             return true;
