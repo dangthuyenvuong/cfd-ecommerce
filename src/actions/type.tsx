@@ -15,6 +15,12 @@ export const USER_LOADING = 'USER_LOADING'
 export const USER_LOGIN = 'USER_LOGIN'
 export const USER_RECEIVE = 'USER_RECEIVE'
 export const USER_FAIL = 'USER_FAIL'
+export const USER = {
+    LOGOUT: 'USER_LOGOUT',
+    FETCH_UPDATE: 'USER_FETCH_UPDATE',
+    RECEIVE_UPDATE: 'USER_RECEIVE_UPDATE',
+    UPDATE: 'USER_UPATE'
+}
 
 
 export const CART_OPEN = 'CART_OPEN'

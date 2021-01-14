@@ -43,6 +43,7 @@ export default function useForm(initValue: any, rules: {
     let errorObj: any = {};
     for (let i in validate) {
       if (i in form) {
+
         if (validate[i].required) {
           if (!form[i]) {
             errorObj[i] = message?.[i]?.required || "Trường này là bắt buộc";
@@ -58,6 +59,13 @@ export default function useForm(initValue: any, rules: {
 
           if (!pattern.test(form[i])) {
             errorObj[i] = message?.[i]?.pattern || "Không đúng định dạng";
+          }
+        }
+
+        if (validate[i].match) {
+          let mathVal = form[validate[i].match] || undefined
+          if (mathVal !== form[i]) {
+            errorObj[i] = message?.[i]?.pattern || "2 trường này không giống nhau";
           }
         }
       }

@@ -1,4 +1,4 @@
-import { USER_FAIL, USER_LOADING, USER_LOGIN, USER_RECEIVE } from "../actions/type";
+import { USER, USER_FAIL, USER_LOADING, USER_LOGIN, USER_RECEIVE } from "../actions/type";
 import LocalStorage from "../helper/LocalStorage";
 
 let initState = {
@@ -17,6 +17,12 @@ export default function userReducer(state = initState, action: any) {
                 ...state,
                 error: false,
                 // login: action.payload
+            }
+        case USER.LOGOUT:
+            localStorage.removeItem('login');
+            return {
+                ...state,
+                login: null
             }
         case USER_LOADING:
             return state;

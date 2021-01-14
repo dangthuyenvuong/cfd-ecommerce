@@ -16,12 +16,13 @@ import Api from "./helper/Api";
 import { loadCategories } from "./actions/categoriesAction";
 
 import { useDispatch } from "react-redux";
+import PrivateRouter from "./components/PrivateRouter";
 const routes = [
   { path: "/the-loai/:cat?", name: "Category", Component: Category },
   { path: "/chi-tiet/:slug", name: "ProductDetails", Component: Details },
   { path: "/thanh-toan", name: "Check Out", Component: Checkout },
   { path: "/dang-nhap", name: "Login", Component: Login },
-  { path: "/thong-tin-ca-nhan", name: "Login", Component: Profile },
+  { path: "/thong-tin-ca-nhan", private: true, name: "Login", Component: Profile },
   { path: "/", name: "Home", Component: Home },
 ];
 function App() {
@@ -41,11 +42,12 @@ function App() {
       <Cart />
       <Header />
       <Switch>
-        {routes.map(({ path, Component }) => (
-          <Route key={path} path={path}>
-            <Component />
-          </Route>
-        ))}
+        {routes.map((e: any) => {
+          return e.private ? <PrivateRouter key={e.path} path={e.path} component={e.Component} />
+            : <Route key={e.path} path={e.path}>
+              <e.Component />
+            </Route>
+        })}
       </Switch>
       <Footer />
     </Router>

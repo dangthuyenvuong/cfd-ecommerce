@@ -1,5 +1,5 @@
 import Api from "../helper/Api";
-import { USER_LOGIN } from "./type";
+import { USER, USER_LOGIN } from "./type";
 
 export function fetchData() {
 
@@ -21,7 +21,34 @@ export async function fetchLogin(params: { username: string, password: string })
             body: params
         })
 
-        console.log(response)
+        return response;
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export function logout() {
+    return {
+        type: USER.LOGOUT
+    }
+}
+
+export function updateProfile(data: { title?: string, phone?: string, password?: string, oldPassword?: string }) {
+    return {
+        type: USER.UPDATE,
+        paylod: data
+    }
+}
+
+export async function fetchUpdateProfile(data: any) {
+    try {
+        // let formData = new FormData();
+        // formData.append('username', params.username)
+        // formData.append('password', params.password)
+        let response: any = await Api('login').post({
+            body: data
+        })
+
         return response;
     } catch (err) {
         console.log(err)
