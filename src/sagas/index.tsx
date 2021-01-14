@@ -3,7 +3,6 @@ import { USER_FAIL, USER_LOGIN, USER_RECEIVE } from '../actions/type'
 import { fetchLogin } from '../actions/userAction'
 
 function* watchLogin(action: any) {
-    console.log(action)
     try {
         const data = yield call(fetchLogin, action.payload)
         if (data._id) {
