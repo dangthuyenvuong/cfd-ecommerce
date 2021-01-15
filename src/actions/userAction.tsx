@@ -45,7 +45,7 @@ export async function fetchUpdateProfile(data: any) {
         // let formData = new FormData();
         // formData.append('username', params.username)
         // formData.append('password', params.password)
-        let response: any = await Api('login').post({
+        let response: any = await Api('update').post({
             body: data
         })
 

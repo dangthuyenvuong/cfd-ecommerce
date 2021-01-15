@@ -1,15 +1,14 @@
 @import "./components/variable.scss";
-// @import "./components/css3.scss";
 @import "./bootstrap_mini";
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/breadcrumbs.scss";
 @import "./reset";
 @import "./components/card.scss";
+@import "./components/paginate.scss";
 @import "./components/cardlist.scss";
 @import "./components/cart.scss";
 @import "./components/form.scss";
-// @import "./components/class.scss";
 
 //pages
 @import "./pages/home.scss";
@@ -49,13 +48,13 @@ img {
   }
 
   &--recipes {
-    border: 2px solid #6a983c;
+    border: 2px solid $main-color;
     margin-left: 33px;
   }
 
   &-buy {
-    border: 1px solid #46760a;
-    background-color: #6a983c;
+    border: 1px solid $main-color;
+    background-color: $main-color;
     // width: 90px;
     cursor: pointer;
 

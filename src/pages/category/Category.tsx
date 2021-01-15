@@ -53,6 +53,7 @@ export default function Category() {
 
   function sortPrice(options: Object) {
     let query = getQueryParam()
+    delete query.page;
 
     query.sort = JSON.stringify(options).replace(/[{}"]/g, '').replace(/:/g, '.');
 
@@ -101,6 +102,7 @@ export default function Category() {
           </div>
           <div className="filter--top">
             <div className="filter--top__group">
+              <div className="label" style={{ marginRight: 15 }}>Sắp xếp: </div>
               <div className="filter--item">
                 <div className="field">
                   <input type="radio" id="small" name="size" checked={sort[0] == 'real_price' && sort[1] == -1} />
@@ -130,13 +132,12 @@ export default function Category() {
                   <div className="nbm">nbm</div>
                 </div>
               </div> */}
-              <div className="filter--item">
+              {/* <div className="filter--item">
                 <div className="field">
                   <input type="checkbox" id="small" name="size" />
                   <label htmlFor="small" className="checkbox">
                     Được tin dùng
                   </label>
-                  {/* <div className="nbm">nbm</div> */}
                 </div>
               </div>
               <div className="filter--item">
@@ -145,7 +146,7 @@ export default function Category() {
                   <label htmlFor="small" className="checkbox">
                     Hàng chính hãng
                   </label>
-                  {/* <div className="nbm">nbm</div> */}
+                  <div className="nbm">nbm</div>
                 </div>
               </div>
               <div className="filter--item">
@@ -165,12 +166,12 @@ export default function Category() {
                     <span className="arrow">
                       <img src="/assets/icon-right.svg" alt="" />
                     </span>
-                    {/* <select name="" id="">
+                    <select name="" id="">
 
-                                            </select> */}
+                                            </select>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="filter--top__applied">
               <h3>Lọc theo:</h3>
