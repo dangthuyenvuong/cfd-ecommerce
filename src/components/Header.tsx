@@ -11,11 +11,11 @@ export default function Header() {
   let menus = [
     {
       title: 'Khuyến mãi',
-      slug: 'khuyen-mai'
+      slug: '/the-loai?sort=discount_rate.-1'
     },
     {
       title: 'Được mua nhiều',
-      slug: 'mua-nhieu'
+      slug: '/the-loai?sort=sort_item.qty.-1'
     },
     {
       title: 'Mới nhất',
@@ -26,8 +26,8 @@ export default function Header() {
       slug: 'hap-dan'
     },
     {
-      title: 'Quà tặng',
-      slug: 'qua-tang'
+      title: 'Voucher',
+      slug: '/the-loai/voucher-dich-vu-the-cao-id11312'
     },
     {
       title: 'Chính sách',
@@ -91,7 +91,7 @@ export default function Header() {
               {
                 menus.map((e: any, i) => (
                   <li key={i}>
-                    <NavLink to={`/category/${e.slug}`} className="title">{e.title}</NavLink>
+                    <NavLink to={e.slug} className="title">{e.title}</NavLink>
                     {/* <span>
                       <img src="/assets/icon-down.svg" alt="" />
                     </span> */}

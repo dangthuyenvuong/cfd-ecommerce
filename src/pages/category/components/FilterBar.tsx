@@ -23,7 +23,7 @@ export default function FilterBar(props: { categories: any[] | null }) {
         <ul>
           {
             categories?.map(e => <li key={e._id}>
-              <NavLink to={`/the-loai/${e.slug}?${getQueryString(urlParams, { remove: { categories: 1 } })}`} activeStyle={style.menuActive}>
+              <NavLink to={`/the-loai/${e.slug}?${getQueryString(urlParams, { remove: { categories: 1, page: 1 } })}`} activeStyle={style.menuActive}>
                 {e.title}
               </NavLink>{" "}
             </li>)

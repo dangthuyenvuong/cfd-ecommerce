@@ -1,3 +1,4 @@
+import { totalmem } from "os";
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,21 +47,28 @@ const Cart = () => {
                             />
                         ))
                     }
-
+                    {
+                        cart.list.length === 0 && <p style={{ textAlign: 'center', marginTop: 80, lineHeight: '25px' }}>Bạn chưa chọn sản phẩm nào, tiếp tục chọn cho mình sản phẩm ưng ý và quay lại.</p>
+                    }
 
                 </div>
                 <div className="cart--foot">
                     <div className="subtotal">
                         Tổng tiền
-        <span>{FormatNumber(cart.amount)}VNĐ</span>
+                        <span>{FormatNumber(cart.amount)}VNĐ</span>
                     </div>
-                    <div className="button">
-                        <div className="btn--apply" onClick={() => dispatch(closeCart())}>
-                            <span>Tiếp tục mua sắm</span>
+                    <div className="button" style={{ padding: 0 }}>
+                        <div className="btn--apply" onClick={() => dispatch(closeCart())} style={{ paddingLeft: 0 }}>
+                            <span>← Tiếp tục mua sắm</span>
                         </div>
-                        <Link onClick={() => dispatch(closeCart())} to="/thanh-toan" className="btn btn-buy">
-                            <span>Thanh toán</span>
-                        </Link>
+                        {
+                            cart.total > 0 && (
+                                <Link onClick={() => dispatch(closeCart())} to="/thanh-toan" className="btn btn-buy">
+                                    <span>Thanh toán</span>
+                                </Link>
+                            )
+                        }
+
                     </div>
                 </div>
             </div>
