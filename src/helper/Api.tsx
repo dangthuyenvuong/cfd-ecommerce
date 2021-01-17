@@ -6,10 +6,9 @@ const domain = "http://localhost:8888/";
 let headers: any = {
   "Content-Type": "application/json",
 };
-let user: any = localStorage.getItem("user");
+let user: any = LocalStorage.get("token");
 let _refreshToken;
 if (user) {
-  user = JSON.parse(user);
   headers = {
     ...headers,
     Authorization: `Bearer ${user.accessToken}`,
@@ -49,6 +48,8 @@ async function refreshToken() {
     }
   } else {
     return new Promise((resolve, reject) => {
+
+      // Tránh trường hợp gọi 2 api liên tiếp, tạo ra 2 refresh token liên tiếp
       Hook.addActionOneTime("setLocalStorage_user", (value: string) => {
         resolve(true);
       });
@@ -61,6 +62,10 @@ async function callApi(...params: [input: RequestInfo, init?: RequestInit]) {
   let res: any = await fetch(...params);
   if (res.status === 200) {
     return await res.json();
+  }
+
+  if (res.status === 401) {
+    alert('Ban không có quyền thực hiện hành động này')
   }
 
   if (res.status === 403) {
@@ -114,3 +119,10 @@ export default (url: string) => {
     },
   };
 };
+
+
+
+export function addToken(token: any) {
+  headers.Authorization = `Bearer ${token.accessToken}`
+  LocalStorage.set('token', token)
+}

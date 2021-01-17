@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import useForm from "../../hooks/useForm";
 import { userLogin } from '../../actions/userAction'
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const constStyle: { [key in string]: React.CSSProperties } = {
 
@@ -42,7 +42,8 @@ const Login = () => {
   let user = useSelector((store: any) => store.user)
 
   function _login() {
-    if (Submit()) {
+    let error = Submit();
+    if (Object.keys(error).length === 0) {
       dispatch(userLogin(data))
     }
   }
@@ -67,7 +68,7 @@ const Login = () => {
                 <i className="fas fa-user" />
               </div>
               <div className="div">
-                <input type="text" className="input" placeholder="Tên đăng nhập" onChange={inputChange} name="username" />
+                <input type="text" className="input" placeholder="Địa chỉ Email" onChange={inputChange} name="username" />
 
               </div>
 
@@ -88,7 +89,10 @@ const Login = () => {
             {
               errors?.password && <p className="error-text" style={constStyle.inputError}>{errors.password}</p>
             }
-            <a href="#">Quên mật khẩu?</a>
+            <div style={{ display: 'flex' }}>
+              <Link to="/quen-mat-khau">Quên mật khẩu?</Link>
+              <Link to="/dang-ky" style={{ marginLeft: 'auto' }}>Bạn chưa có tài khoản? <span style={{ color: '#189eff' }}>Đăng ký</span></Link>
+            </div>
             <div className="btn" onClick={_login}>Đăng nhập</div>
           </form>
         </div>

@@ -7,6 +7,10 @@ import Order from "./components/Order";
 import Payment from "./components/Payment";
 
 export default function Checkout() {
+  function submit() {
+
+  }
+
   return (
     <>
       <Breadcrumbs links={[
@@ -27,7 +31,7 @@ export default function Checkout() {
             <div className="col-md-5">
               <Order />
               <div className="btn btn-buy" style={{ marginTop: 10, marginLeft: 'auto' }}>
-                <span>Hoàn tất đặt hàng</span>
+                <span onClick={submit}>Hoàn tất đặt hàng</span>
               </div>
             </div>
           </div>

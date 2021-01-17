@@ -1,4 +1,4 @@
-import { USER, USER_FAIL, USER_LOADING, USER_LOGIN, USER_RECEIVE } from "../actions/type";
+import { USER } from "../actions/type";
 import LocalStorage from "../helper/LocalStorage";
 
 let initState = {
@@ -12,30 +12,60 @@ export default function userReducer(state = initState, action: any) {
 
     switch (action.type) {
 
-        case USER_LOGIN:
+        case USER.LOGIN:
             return {
                 ...state,
                 error: false,
                 // login: action.payload
             }
         case USER.LOGOUT:
-            localStorage.removeItem('login');
+            LocalStorage.remove('login')
+            LocalStorage.remove('token')
             return {
                 ...state,
                 login: null
             }
-        case USER_LOADING:
+        case USER.LOADING:
             return state;
-        case USER_RECEIVE:
+        case USER.LOGIN_RECEIVE:
             LocalStorage.set('login', action.payload)
             return {
                 ...state,
                 login: action.payload,
             }
-        case USER_FAIL:
+        case USER.LOGIN_FAIL:
             return {
                 ...state,
                 error: action.payload
+            }
+        case USER.REGISTER:
+            return {
+                ...state,
+                loading: true
+            }
+        case USER.REGISTER_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        case USER.REGISTER_RECEIVE:
+            return {
+                ...state,
+                loading: false,
+                login: action.payload
+            }
+        case USER.UPDATE:
+            return {
+                ...state,
+                loading: true
+            }
+        case USER.RECEIVE_UPDATE:
+            LocalStorage.set('login', action.payload)
+            return {
+                ...state,
+                loading: false,
+                login: action.payload
             }
         default: return state;
     }

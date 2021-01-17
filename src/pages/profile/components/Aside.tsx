@@ -14,7 +14,7 @@ export default function Aside() {
         <aside className="account-aside">
             <div className="avatar">
                 <img src="https://salt.tikicdn.com/desktop/img/avatar.png" />
-                <div className="info">Tài khoản của<strong>{user.login.title}</strong></div>
+                <div className="info">Tài khoản của<strong>{user.login.name}</strong></div>
             </div>
             <ul className="nav">
                 <li>

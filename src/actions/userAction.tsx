@@ -1,5 +1,7 @@
-import Api from "../helper/Api";
-import { USER, USER_LOGIN } from "./type";
+import { LocalStorage } from "../helper";
+import Api, { addToken } from "../helper/Api";
+import store from "../store";
+import { USER } from "./type";
 
 export function fetchData() {
 
@@ -7,7 +9,7 @@ export function fetchData() {
 
 export function userLogin(params: { username: string, password: string }) {
     return {
-        type: USER_LOGIN,
+        type: USER.LOGIN,
         payload: params
     }
 }
@@ -21,6 +23,8 @@ export async function fetchLogin(params: { username: string, password: string })
             body: params
         })
 
+        addToken(response.data.token)
+
         return response;
     } catch (err) {
         console.log(err)
@@ -28,15 +32,25 @@ export async function fetchLogin(params: { username: string, password: string })
 }
 
 export function logout() {
+
     return {
-        type: USER.LOGOUT
+        type: USER.LOGOUT,
     }
 }
 
-export function updateProfile(data: { title?: string, phone?: string, password?: string, oldPassword?: string }) {
+export function fetchLogout(data: any) {
+    return Api('logout').post({
+        body: {
+            _id: LocalStorage.get('token')._id
+        }
+    })
+}
+
+export function updateProfile(data: any) {
+
     return {
         type: USER.UPDATE,
-        paylod: data
+        payload: data
     }
 }
 
@@ -45,7 +59,7 @@ export async function fetchUpdateProfile(data: any) {
         // let formData = new FormData();
         // formData.append('username', params.username)
         // formData.append('password', params.password)
-        let response: any = await Api('update').post({
+        let response: any = await Api('update-profile').post({
             body: data
         })
 
@@ -54,3 +68,23 @@ export async function fetchUpdateProfile(data: any) {
         console.log(err)
     }
 }
+
+
+export function register(data: any) {
+    return {
+        type: USER.REGISTER,
+        payload: data
+    }
+}
+
+export async function fetchRegister(data: any): Promise<any> {
+    let result = await Api('register').post({
+        body: data
+    })
+
+    addToken(result.data.token)
+
+    return result;
+}
+
+

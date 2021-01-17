@@ -17,11 +17,13 @@ import { loadCategories } from "./actions/categoriesAction";
 
 import { useDispatch } from "react-redux";
 import PrivateRouter from "./components/PrivateRouter";
+import Register from "./pages/register";
 const routes = [
   { path: "/the-loai/:cat?", name: "Category", Component: Category },
   { path: "/chi-tiet/:slug", name: "ProductDetails", Component: Details },
   { path: "/thanh-toan", name: "Check Out", Component: Checkout },
   { path: "/dang-nhap", name: "Login", Component: Login },
+  { path: "/dang-ky", name: "Login", Component: Register },
   { path: "/thong-tin-ca-nhan", private: true, name: "Login", Component: Profile },
   { path: "/", name: "Home", Component: Home },
 ];

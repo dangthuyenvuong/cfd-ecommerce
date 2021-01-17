@@ -35,10 +35,10 @@ export default function useForm(initValue: any, rules: {
   function inputChange(e: any) {
     setForm({
       ...form,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value,
     });
   }
-  function Submit(): Boolean {
+  function Submit(): Boolean | any {
     let { validate, message } = rules;
     let errorObj: any = {};
     for (let i in validate) {
@@ -65,13 +65,23 @@ export default function useForm(initValue: any, rules: {
         if (validate[i].match) {
           let mathVal = form[validate[i].match] || undefined
           if (mathVal !== form[i]) {
-            errorObj[i] = message?.[i]?.pattern || "2 trường này không giống nhau";
+            errorObj[i] = message?.[i]?.match || "Vui lòng điền giống thông tin cần thiết";
+            continue;
+          }
+        }
+
+        if (validate[i].different) {
+          let mathVal = form[validate[i].different] || undefined
+          if (mathVal === form[i]) {
+            errorObj[i] = message?.[i]?.different || "2 trường này không được giống nhau";
+            continue;
+
           }
         }
       }
     }
     setErrors(errorObj);
-    return Object.keys(errorObj).length === 0;
+    return errorObj;
   }
   return {
     data: form,

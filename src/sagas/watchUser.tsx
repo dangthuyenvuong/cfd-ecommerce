@@ -1,14 +1,14 @@
 import { call, put } from "redux-saga/effects"
-import { USER, USER_FAIL, USER_RECEIVE } from "../actions/type"
-import { fetchLogin, fetchUpdateProfile } from "../actions/userAction"
+import { USER } from "../actions/type"
+import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateProfile } from "../actions/userAction"
 
 export function* watchUser(action: any) {
     try {
         const data = yield call(fetchLogin, action.payload)
-        if (data._id) {
-            yield put({ type: USER_RECEIVE, payload: data })
+        if (data?.data?._id) {
+            yield put({ type: USER.LOGIN_RECEIVE, payload: data.data })
         } else {
-            yield put({ type: USER_FAIL, payload: 'Username hoặc password không đúng' })
+            yield put({ type: USER.LOGIN_FAIL, payload: 'Username hoặc password không đúng' })
         }
     } catch (err) {
 
@@ -18,13 +18,36 @@ export function* watchUser(action: any) {
 
 export function* watchUpdateProfile(action: any) {
     try {
-        const data = yield call(fetchUpdateProfile, action.payload)
-        if (data.insertCount) {
+        const data: any = yield call(fetchUpdateProfile, action.payload)
+        if (data.data) {
             yield put({ type: USER.RECEIVE_UPDATE, payload: data.data })
         } else {
-            yield put({ type: USER_FAIL, payload: 'Cập nhật thông tin thất bại' })
+            yield put({ type: USER.UPDATE_ERROR, payload: 'Cập nhật thông tin thất bại' })
         }
     } catch (er) {
+
+    }
+}
+
+
+export function* watchRegister(action: any) {
+    try {
+        const data = yield call(fetchRegister, action.payload)
+        if (data.data) {
+            yield put({ type: USER.REGISTER_RECEIVE, payload: data.data })
+            yield put({ type: USER.LOGIN_RECEIVE, payload: data.data })
+        } else {
+            yield put({ type: USER.REGISTER_FAIL, payload: data.error })
+        }
+    } catch (er) {
+
+    }
+}
+
+export function* watchLogout(action: any) {
+    try {
+        const data = yield call(fetchLogout, action.payload)
+    } catch (err) {
 
     }
 }
