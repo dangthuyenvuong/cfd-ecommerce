@@ -31,7 +31,7 @@ export default function Home() {
     function renderCatDiscount() {
         return categories.list.map((e: any) => ({
             ...e,
-            slug: '/the-loai/' + e.slug + '?' + 'sort=sort_item.qty.-1'
+            slug: '/the-loai/' + e.slug + '?' + 'sort=discount_rate.-1'
         }))
     }
 
