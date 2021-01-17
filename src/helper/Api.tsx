@@ -1,8 +1,8 @@
 import Hook from "./Hook";
 import LocalStorage from "./LocalStorage";
 
-const domain = "https://cfd-reactjs.herokuapp.com/";
-// const domain = "http://localhost:8888/";
+// const domain = "https://cfd-reactjs.herokuapp.com/";
+const domain = "http://localhost:8888/";
 let headers: any = {
   "Content-Type": "application/json",
 };

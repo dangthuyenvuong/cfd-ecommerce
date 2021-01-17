@@ -79,8 +79,8 @@ export default function Info() {
         </div>
         <div className="field--wrap bg-grey" style={{ marginBottom: 16 }}>
           <div className="field">
-            <input type="radio" id="fedex" name="billing-method" onClick={shippingSelect} data-frice={15000} value="giao_thuong" defaultChecked={cart.shippingSelected === 'giao_thuong'} />
-            <label htmlFor="fedex" className="radio">Giao thường</label>
+            <input type="radio" id="fedex" name="billing-method" onChange={shippingSelect} data-frice={15000} value="giao_thuong" defaultChecked={cart.shippingSelected === 'giao_thuong'} />
+            <label htmlFor="fedex" className={'radio ' + (cart.shippingSelected === 'giao_thuong' ? 'active' : '')}>Giao thường</label>
           </div>
           <div className="additional">
             <span className="green"> + {FormatNumber(15000)}VNĐ</span>
@@ -92,8 +92,8 @@ export default function Info() {
         </div>
         <div className="field--wrap bg-grey">
           <div className="field">
-            <input type="radio" id="dhl" name="billing-method" onClick={shippingSelect} data-frice={45000} value="giao_nhanh" defaultChecked={cart.shippingSelected === 'giao_nhanh'} />
-            <label htmlFor="dhl" className="radio">Giao hàng nhanh</label>
+            <input type="radio" id="dhl" name="billing-method" onChange={shippingSelect} data-frice={45000} value="giao_nhanh" defaultChecked={cart.shippingSelected === 'giao_nhanh'} />
+            <label htmlFor="dhl" className={'radio ' + (cart.shippingSelected === 'giao_nhanh' ? 'active' : '')}>Giao hàng nhanh</label>
           </div>
           <div className="additional">
             <span className="green"> + {FormatNumber(45000)}VNĐ</span>

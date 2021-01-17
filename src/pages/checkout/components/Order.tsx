@@ -1,8 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { CartItem } from "../../../components/Cart";
 import { FormatNumber } from "../../../helper";
 
+let time: any = new Date();
+time.setDate(time.getDate() + 4)
+time = `Tháng ${time.getMonth() + 1}, Ngày ${time.getDate()}, ${time.getFullYear()}`
 
 const style: { [key in string]: React.CSSProperties } = {
   price: {
@@ -12,6 +16,7 @@ const style: { [key in string]: React.CSSProperties } = {
 
 export default function Order() {
   const cart = useSelector((state: any) => state.cart)
+  if (cart.total === 0) return <Redirect to="/the-loai" />
   return (
     <div className="order">
       <div className="order--inner">
@@ -51,7 +56,7 @@ export default function Order() {
           <div className="total">
             <div className="total--title">
               <h4>Tổng tiền</h4>
-              <p>Ngày giao hàng dự kiến: Tháng 4, Ngày 12, 2020</p>
+              <p>Ngày giao hàng dự kiến: {time}</p>
             </div>
             <div className="total--price">{FormatNumber(cart.amount + cart.vat + cart.shippingFee)}VNĐ</div>
           </div>

@@ -18,10 +18,27 @@ export default function Payment() {
           <p>Vui lòng chọn 1 trong các hình thức thanh toán bên dưới</p>
           <p>Bước 3 (5)</p>
         </div>
-        <div className="wrap">
+        <div className={`field--wrap ${cart.paymentMethod !== 'money' && 'bg-grey'}`} style={{ marginBottom: "16px" }}>
+          <div className="field">
+            <input
+              type="radio"
+              name="payment-method"
+              id="payment_money"
+              value="money"
+              defaultChecked={cart.paymentMethod === 'money'}
+              onClick={paymentSelect}
+
+            />
+            <label htmlFor="payment_money" className="radio">Thanh toán khi nhận hàng</label>
+          </div>
+          <div className="icon">
+            <img src="/assets/icon-money.png" alt="" style={{ width: 32 }} />
+          </div>
+        </div>
+        <div className={`wrap ${cart.paymentMethod !== 'creditCard' && 'bg-grey'}`}>
           <div className="field--top">
-            <div className="field--wrap">
-              <div className="field" style={{ paddingLeft: 0 }}>
+            <div className="field--wrap" style={{ marginTop: 0, padding: 0 }}>
+              <div className="field" >
                 <input
                   type="radio"
                   name="payment-method"
@@ -40,50 +57,55 @@ export default function Payment() {
               </div>
             </div>
           </div>
-          <div className="field--bottom">
-            <div className="field--wrap">
-              <div className="custom-field" style={{ width: "100%" }}>
-                <label htmlFor="email">Card number</label>
-                <input
-                  className="text"
-                  type="text"
-                  name="email"
-                  placeholder="Card number"
-                />
+          {
+            cart.paymentMethod === 'creditCard' && (
+              <div className="field--bottom">
+                <div className="field--wrap">
+                  <div className="custom-field" style={{ width: "100%" }}>
+                    <label htmlFor="email">Card number</label>
+                    <input
+                      className="text"
+                      type="text"
+                      name="email"
+                      placeholder="Card number"
+                    />
+                  </div>
+                </div>
+                <div className="field--wrap">
+                  <div className="custom-field" style={{ width: 350 }}>
+                    <label htmlFor="email">Card holder</label>
+                    <input
+                      className="text"
+                      type="text"
+                      name="cardHolder"
+                      placeholder="Card holder"
+                    />
+                  </div>
+                  <div className="custom-field small">
+                    <label htmlFor="email">Expiration date</label>
+                    <input
+                      className="text-small"
+                      type="text"
+                      name="Expiration"
+                      placeholder="DD/MM/YY"
+                    />
+                  </div>
+                  <div className="custom-field small">
+                    <label htmlFor="email">CVC</label>
+                    <input
+                      className="text-small"
+                      type="text"
+                      name="cvc"
+                      placeholder="CVC"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="field--wrap">
-              <div className="custom-field" style={{ width: 350 }}>
-                <label htmlFor="email">Card holder</label>
-                <input
-                  className="text"
-                  type="text"
-                  name="cardHolder"
-                  placeholder="Card holder"
-                />
-              </div>
-              <div className="custom-field small">
-                <label htmlFor="email">Expiration date</label>
-                <input
-                  className="text-small"
-                  type="text"
-                  name="Expiration"
-                  placeholder="DD/MM/YY"
-                />
-              </div>
-              <div className="custom-field small">
-                <label htmlFor="email">CVC</label>
-                <input
-                  className="text-small"
-                  type="text"
-                  name="cvc"
-                  placeholder="CVC"
-                />
-              </div>
-            </div>
-          </div>
+            )
+          }
+
         </div>
-        <div className="field--wrap bg-grey" style={{ marginBottom: "16px" }}>
+        <div className={`field--wrap ${cart.paymentMethod !== 'paypal' && 'bg-grey'}`} style={{ marginBottom: "16px" }}>
           <div className="field">
             <input
               type="radio"
@@ -94,15 +116,13 @@ export default function Payment() {
               onClick={paymentSelect}
 
             />
-            <label htmlFor="payment2" className="radio">
-              PayPal
-                </label>
+            <label htmlFor="payment2" className="radio">PayPal</label>
           </div>
           <div className="icon">
             <img src="/assets/paypal.svg" alt="" />
           </div>
         </div>
-        <div className="field--wrap bg-grey">
+        <div className={`field--wrap ${cart.paymentMethod !== 'bitcoin' && 'bg-grey'}`}>
           <div className="field">
             <input
               type="radio"

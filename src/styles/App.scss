@@ -99,12 +99,13 @@ img {
   input[type="radio"] {
     display: none;
 
-    // &[checked] {
-    //   +.radio::before {
-    //     border: 6px solid #6a983c;
-    //     background-color: #fff;
-    //   }
-    // }
+    &[checked] {
+      +.radio::before {
+        border: 6px solid #6a983c;
+        background-color: #fff;
+      }
+    }
+
     +label {
       &.active::before {
         border: 6px solid #6a983c;

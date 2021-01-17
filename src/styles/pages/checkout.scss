@@ -27,7 +27,7 @@
       border: 1px solid #d1d1d1;
       box-sizing: border-box;
       border-radius: 12px;
-      padding: 16px;
+      padding: 7px;
       margin-bottom: 32px;
     }
 
@@ -35,7 +35,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 32px;
+      margin-top: 32px;
+      padding: 7px;
+
+      &.false {
+        border: 1px solid #d1d1d1;
+        border-radius: 12px;
+      }
 
       .custom-field {
         &.small {
@@ -154,6 +160,13 @@
     }
   }
 
+  .field--top {
+    .field--wrap {
+      border: none;
+
+    }
+  }
+
   .field--bottom {
     .field--wrap {
       justify-content: flex-start;
@@ -166,7 +179,6 @@
   border: 1px solid #d1d1d1;
   box-sizing: border-box;
   border-radius: 12px;
-  padding: 7px;
 }
 
 .order {

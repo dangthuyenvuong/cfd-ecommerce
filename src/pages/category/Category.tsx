@@ -105,19 +105,19 @@ export default function Category() {
               <div className="label" style={{ marginRight: 15 }}>Sắp xếp: </div>
               <div className="filter--item">
                 <div className="field">
-                  <input type="radio" id="small" name="size" checked={sort[0] == 'real_price' && sort[1] == -1} />
+                  <input type="radio" id="small" name="size" defaultChecked={sort[0] == 'real_price' && sort[1] == -1} />
                   <label htmlFor="small" className={`radio ${sort[0] == 'real_price' && sort[1] == -1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { real_price: -1 })}>
                     Giá cao
                   </label>
                 </div>
                 <div className="field">
-                  <input type="radio" id="big" name="size" checked={sort[0] == 'real_price' && sort[1] == 1} />
+                  <input type="radio" id="big" name="size" defaultChecked={sort[0] == 'real_price' && sort[1] == 1} />
                   <label htmlFor="big" className={`radio ${sort[0] == 'real_price' && sort[1] == 1 ? 'active' : ''}`} onClick={sortPrice.bind(null, { real_price: 1 })}>
                     Giá thấp
                   </label>
                 </div>
                 <div className="field">
-                  <input type="radio" id="km" name="size" checked={sort[0] == 'discount_rate'} />
+                  <input type="radio" id="km" name="size" defaultChecked={sort[0] == 'discount_rate'} />
                   <label htmlFor="big" className={`radio ${sort[0] == 'discount_rate' ? 'active' : ''}`} onClick={sortPrice.bind(null, { discount_rate: -1 })}>
                     Khuyến mãi nhiều
                   </label>
