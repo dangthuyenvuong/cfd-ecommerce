@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_CLOSE, CART_ITEM_DECREMENT, CART_ITEM_INCREMENT, CART_OPEN, CART_PAYMENT_OPTION, CART_REMOVE_ITEM, CART_SHIPPING_OPTION } from "../actions/type";
+import { CART } from "../actions/type";
 import LocalStorage from "../helper/LocalStorage";
 
 const initState = {
@@ -26,18 +26,23 @@ export default (state: stateInit = initState, action: any) => {
     }
 
     switch (action.type) {
-        case CART_OPEN:
+        case CART.INIT:
+            return returnState({
+                ...state,
+                ...action.payload
+            })
+        case CART.OPEN:
 
             return {
                 ...state,
                 open: true
             }
-        case CART_CLOSE:
+        case CART.CLOSE:
             return {
                 ...state,
                 open: false
             }
-        case CART_ADD_ITEM:
+        case CART.ADD_ITEM:
             {
                 let { list, total } = state;
                 let f: any = list.find((e: any) => e._id === action.payload._id)
@@ -57,7 +62,7 @@ export default (state: stateInit = initState, action: any) => {
                     total
                 })
             }
-        case CART_ITEM_DECREMENT:
+        case CART.ITEM_DECREMENT:
             {
                 let { list, total } = state;
 
@@ -81,7 +86,7 @@ export default (state: stateInit = initState, action: any) => {
 
 
             }
-        case CART_ITEM_INCREMENT:
+        case CART.ITEM_INCREMENT:
             {
                 let { list, total } = state;
 
@@ -99,7 +104,7 @@ export default (state: stateInit = initState, action: any) => {
 
                 return state;
             }
-        case CART_REMOVE_ITEM:
+        case CART.REMOVE_ITEM:
             let { list, total } = state;
             let f = list.findIndex(e => e._id === action.payload)
             if (f !== -1) {
@@ -114,7 +119,7 @@ export default (state: stateInit = initState, action: any) => {
             }
             return state;
 
-        case CART_SHIPPING_OPTION:
+        case CART.SHIPPING_OPTION:
 
             return returnState({
                 ...state,
@@ -122,11 +127,23 @@ export default (state: stateInit = initState, action: any) => {
                 shippingSelected: action.payload.option
             })
 
-        case CART_PAYMENT_OPTION:
+        case CART.PAYMENT_OPTION:
 
             return returnState({
                 ...state,
                 paymentMethod: action.payload
+            })
+
+        case CART.DELETE_ALL:
+            return returnState({
+                list: [],
+                amount: 0,
+                total: 0,
+                shippingFee: 15000,
+                shippingSelected: 'giao_thuong',
+                vat: 0,
+                paymentMethod: 'creditCard',
+                open: false,
             })
 
         default:

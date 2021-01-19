@@ -1,14 +1,15 @@
-import { CART_ADD_ITEM, CART_CLOSE, CART_ITEM_DECREMENT, CART_ITEM_INCREMENT, CART_OPEN, CART_PAYMENT_OPTION, CART_REMOVE_ITEM, CART_SHIPPING_OPTION } from "./type";
+import { Cart } from "../api";
+import { CART } from "./type";
 
 export function openCart() {
     return {
-        type: CART_OPEN
+        type: CART.OPEN
     }
 }
 
 export function closeCart() {
     return {
-        type: CART_CLOSE
+        type: CART.CLOSE
     }
 }
 
@@ -16,28 +17,28 @@ export function cartAddItem(data: any) {
     data = JSON.parse(JSON.stringify(data))
 
     return {
-        type: CART_ADD_ITEM,
+        type: CART.ADD_ITEM,
         payload: data
     }
 }
 
 export function itemIncrement(index: number) {
     return {
-        type: CART_ITEM_INCREMENT,
+        type: CART.ITEM_INCREMENT,
         payload: index
     }
 }
 
 export function itemDecrement(id: any) {
     return {
-        type: CART_ITEM_DECREMENT,
+        type: CART.ITEM_DECREMENT,
         payload: id
     }
 }
 
 export function deleteItem(id: any) {
     return {
-        type: CART_REMOVE_ITEM,
+        type: CART.REMOVE_ITEM,
         payload: id
     }
 }
@@ -47,14 +48,18 @@ export function selectShippingOption(data: {
     option: 'giao_thuong' | 'giao_nhanh'
 }) {
     return {
-        type: CART_SHIPPING_OPTION,
+        type: CART.SHIPPING_OPTION,
         payload: data
     }
 }
 
 export function selectPayment(data: any) {
     return {
-        type: CART_PAYMENT_OPTION,
+        type: CART.PAYMENT_OPTION,
         payload: data
     }
+}
+
+export function fetchCartCreate(data: any) {
+    return Cart.create(data);
 }

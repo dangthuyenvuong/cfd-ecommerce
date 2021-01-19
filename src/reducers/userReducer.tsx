@@ -19,8 +19,6 @@ export default function userReducer(state = initState, action: any) {
                 // login: action.payload
             }
         case USER.LOGOUT:
-            LocalStorage.remove('login')
-            LocalStorage.remove('token')
             return {
                 ...state,
                 login: null
