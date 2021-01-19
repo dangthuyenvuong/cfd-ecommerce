@@ -1,6 +1,6 @@
+import { User } from "../api";
 import { LocalStorage } from "../helper";
-import Api, { addToken } from "../helper/Api";
-import store from "../store";
+import { addToken } from "../helper/Api";
 import { USER } from "./type";
 
 export function fetchData() {
@@ -19,9 +19,7 @@ export async function fetchLogin(params: { username: string, password: string })
         // let formData = new FormData();
         // formData.append('username', params.username)
         // formData.append('password', params.password)
-        let response: any = await Api('login').post({
-            body: params
-        })
+        let response: any = await User.login(params)
 
         addToken(response.data.token)
 
@@ -39,11 +37,7 @@ export function logout() {
 }
 
 export function fetchLogout(data: any) {
-    return Api('logout').post({
-        body: {
-            _id: LocalStorage.get('token')._id
-        }
-    })
+    return User.logout(LocalStorage.get('token')._id)
 }
 
 export function updateProfile(data: any) {
@@ -55,18 +49,7 @@ export function updateProfile(data: any) {
 }
 
 export async function fetchUpdateProfile(data: any) {
-    try {
-        // let formData = new FormData();
-        // formData.append('username', params.username)
-        // formData.append('password', params.password)
-        let response: any = await Api('update-profile').post({
-            body: data
-        })
-
-        return response;
-    } catch (err) {
-        console.log(err)
-    }
+    return User.updateInfo(data)
 }
 
 
@@ -78,9 +61,7 @@ export function register(data: any) {
 }
 
 export async function fetchRegister(data: any): Promise<any> {
-    let result = await Api('register').post({
-        body: data
-    })
+    let result: any = User.register(data)
 
     addToken(result.data.token)
 

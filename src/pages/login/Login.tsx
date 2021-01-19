@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useForm from "../../hooks/useForm";
 import { userLogin } from '../../actions/userAction'
 import { Link, Redirect } from "react-router-dom";
+import { useState } from "react";
 
 const constStyle: { [key in string]: React.CSSProperties } = {
 
@@ -18,6 +19,8 @@ const constStyle: { [key in string]: React.CSSProperties } = {
 
 
 const Login = () => {
+  let [loading, setLoading] = useState(false)
+  let [error, setError] = useState()
 
   let { data, Submit, errors, inputChange } = useForm({ username: '', password: '' }, {
     validate: {

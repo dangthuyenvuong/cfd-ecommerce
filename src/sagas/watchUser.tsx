@@ -2,7 +2,7 @@ import { call, put } from "redux-saga/effects"
 import { USER } from "../actions/type"
 import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateProfile } from "../actions/userAction"
 
-export function* watchUser(action: any) {
+export function* watchLogin(action: any) {
     try {
         const data = yield call(fetchLogin, action.payload)
         if (data?.data?._id) {
@@ -22,7 +22,7 @@ export function* watchUpdateProfile(action: any) {
         if (data.data) {
             yield put({ type: USER.RECEIVE_UPDATE, payload: data.data })
         } else {
-            yield put({ type: USER.UPDATE_ERROR, payload: 'Cập nhật thông tin thất bại' })
+            yield put({ type: USER.ERROR, payload: data.error })
         }
     } catch (er) {
 
@@ -37,7 +37,7 @@ export function* watchRegister(action: any) {
             yield put({ type: USER.REGISTER_RECEIVE, payload: data.data })
             yield put({ type: USER.LOGIN_RECEIVE, payload: data.data })
         } else {
-            yield put({ type: USER.REGISTER_FAIL, payload: data.error })
+            yield put({ type: USER.ERROR, payload: data.error })
         }
     } catch (er) {
 

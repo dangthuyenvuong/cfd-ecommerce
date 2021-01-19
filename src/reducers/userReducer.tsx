@@ -25,8 +25,12 @@ export default function userReducer(state = initState, action: any) {
                 ...state,
                 login: null
             }
-        case USER.LOADING:
-            return state;
+        case USER.ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
         case USER.LOGIN_RECEIVE:
             LocalStorage.set('login', action.payload)
             return {
@@ -41,6 +45,7 @@ export default function userReducer(state = initState, action: any) {
         case USER.REGISTER:
             return {
                 ...state,
+                error: null,
                 loading: true
             }
         case USER.REGISTER_FAIL:
@@ -58,6 +63,7 @@ export default function userReducer(state = initState, action: any) {
         case USER.UPDATE:
             return {
                 ...state,
+                error: null,
                 loading: true
             }
         case USER.RECEIVE_UPDATE:

@@ -195,7 +195,9 @@ export default function TabProfile() {
                             </div>
                         </>
                     }
-
+                    {
+                        user.error && <p className="error-text">{user.error}</p>
+                    }
                     <div className="form-control">
                         <label className="input-label">&nbsp;</label>
                         <button type="submit" className="btn yellow btn-submit" onClick={updateClick}> Cập nhật {user.loading && <CircularProgress size={20} style={{ marginLeft: 10 }} />}</button>

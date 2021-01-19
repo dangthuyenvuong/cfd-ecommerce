@@ -50,7 +50,7 @@ const Register = () => {
     const dispatch = useDispatch()
     let user = useSelector((store: any) => store.user)
 
-    function _login() {
+    function _register() {
         if (!user.loading && Submit()) {
             dispatch(register(data))
         }
@@ -114,7 +114,7 @@ const Register = () => {
                             <Link to="/quen-mat-khau">Quên mật khẩu?</Link>
                             <Link to="/dang-nhap" style={{ marginLeft: 'auto' }}>Đã có tài khoản? <span style={{ color: '#189eff' }}>Đăng nhập</span></Link>
                         </div>
-                        <div className="btn" onClick={_login}>{user.loading ? <CircularProgress size={30} /> : 'Đăng nhập'}</div>
+                        <div className="btn" onClick={_register}>{user.loading ? <CircularProgress size={30} /> : 'Đăng ký'}</div>
                     </form>
                 </div>
             </div>
