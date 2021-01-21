@@ -13,12 +13,12 @@ export function closeCart() {
     }
 }
 
-export function cartAddItem(data: any) {
-    data = JSON.parse(JSON.stringify(data))
+export function cartAddItem(_id: string) {
+    // data = JSON.parse(JSON.stringify(data))
 
     return {
         type: CART.ADD_ITEM,
-        payload: data
+        payload: _id
     }
 }
 
@@ -61,5 +61,5 @@ export function selectPayment(data: any) {
 }
 
 export function fetchCartCreate(data: any) {
-    return Cart.create(data);
+    return Cart.cart(data);
 }

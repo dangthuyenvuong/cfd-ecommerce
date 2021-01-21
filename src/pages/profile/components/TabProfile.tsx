@@ -140,23 +140,23 @@ export default function TabProfile() {
                     <div className="form-control">
                         <label className="input-label">Ngày sinh<span>(không bắt buộc)</span>
                         </label>
-                        <select style={{ margin: '0px 12px 0px 0px' }} name="birth_day" onChange={inputChange}>
+                        <select style={{ margin: '0px 12px 0px 0px' }} name="birth_day" onChange={inputChange} defaultValue={parseInt(data.birth_day || 0)}>
                             <option>Ngày</option>
                             {
-                                [...Array(31)].map((e: any, i: number) => <option selected={parseInt(data.birth_day) === i + 1} value={i + 1}>{i + 1}</option>)
+                                [...Array(31)].map((e: any, i: number) => <option key={i} value={i + 1}>{i + 1}</option>)
                             }
 
                         </select>
-                        <select style={{ margin: '0px 12px 0px 0px' }} name="birth_month" onChange={inputChange}>
+                        <select style={{ margin: '0px 12px 0px 0px' }} name="birth_month" onChange={inputChange} defaultValue={parseInt(data.birth_month || 0)}>
                             <option>Tháng</option>
                             {
-                                [...Array(12)].map((e: any, i: number) => <option selected={parseInt(data.birth_month) === i + 1} value={i + 1}>{i + 1}</option>)
+                                [...Array(12)].map((e: any, i: number) => <option key={i} value={i + 1}>{i + 1}</option>)
                             }
                         </select>
-                        <select style={{ margin: '0px 12px 0px 0px' }} name="birth_year" onChange={inputChange}>
+                        <select style={{ margin: '0px 12px 0px 0px' }} name="birth_year" onChange={inputChange} defaultValue={parseInt(data.birth_year || 0)}>
                             <option>Năm</option>
                             {
-                                [...Array(50)].map((e: any, i: number) => <option selected={parseInt(data.birth_year) === 2020 - i} value={2020 - i}>{2020 - i}</option>)
+                                [...Array(50)].map((e: any, i: number) => <option key={i} value={2020 - i}>{2020 - i}</option>)
                             }
                         </select>
                     </div>

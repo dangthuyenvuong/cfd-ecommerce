@@ -2,14 +2,14 @@ import { Api } from "../helper"
 
 
 export default {
-    update: (data: any) => {
-        return Api('update-cart').post({
+    cart: (data: any) => {
+        return Api('ecommerce/v1/cart').post({
             body: data
         })
     },
-    create: (data: any) => {
-        return Api('cart').post({
+    update: (_id: string, data: any) => {
+        return Api(`ecommerce/v1/update-cart/${_id}`).post({
             body: data
         })
-    }
+    },
 }

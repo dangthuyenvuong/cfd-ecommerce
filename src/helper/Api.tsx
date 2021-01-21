@@ -126,3 +126,9 @@ export function addToken(token: any) {
   headers.Authorization = `Bearer ${token.accessToken}`
   LocalStorage.set('token', token)
 }
+
+
+export function removeToken() {
+  delete headers.Authorization
+  LocalStorage.remove('token')
+}

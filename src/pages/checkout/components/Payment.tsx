@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartAddItem, selectPayment } from "../../../actions/cartAction";
+import { selectPayment } from "../../../actions/cartAction";
 
 export default function Payment() {
   const dispatch = useDispatch()

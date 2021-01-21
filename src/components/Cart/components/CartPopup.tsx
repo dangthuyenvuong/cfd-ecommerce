@@ -43,6 +43,7 @@ const Cart = () => {
                     {
                         cart.list.map((e: any) => (
                             <CartItem
+                                key={e.id}
                                 {...e}
                             />
                         ))

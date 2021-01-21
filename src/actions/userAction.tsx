@@ -1,6 +1,5 @@
 import { User } from "../api";
 import { LocalStorage } from "../helper";
-import { addToken } from "../helper/Api";
 import { USER } from "./type";
 
 export function fetchData() {
@@ -14,19 +13,21 @@ export function userLogin(params: { username: string, password: string }) {
     }
 }
 
-export async function fetchLogin(params: { username: string, password: string }) {
-    try {
-        // let formData = new FormData();
-        // formData.append('username', params.username)
-        // formData.append('password', params.password)
-        let response: any = await User.login(params)
+export function fetchLogin(params: { username: string, password: string }) {
+    return User.login(params)
+    // try {
+    //     // let formData = new FormData();
+    //     // formData.append('username', params.username)
+    //     // formData.append('password', params.password)
+    //     return User.login(params)
+    //     console.log(response)
 
-        addToken(response.data.token)
 
-        return response;
-    } catch (err) {
-        console.log(err)
-    }
+
+    //     return response;
+    // } catch (err) {
+    //     console.log(err)
+    // }
 }
 
 export function logout() {
@@ -63,7 +64,7 @@ export function register(data: any) {
 export async function fetchRegister(data: any): Promise<any> {
     let result: any = User.register(data)
 
-    addToken(result.data.token)
+    // addToken(result.data.token)
 
     return result;
 }

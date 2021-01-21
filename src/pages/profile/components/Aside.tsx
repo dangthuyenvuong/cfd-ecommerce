@@ -51,7 +51,7 @@ export default function Aside() {
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)" onClick={() => dispatch(logout())}>
+                    <a href="#" onClick={(e) => { dispatch(logout()); e.preventDefault(); }}>
 
                         <span style={{ marginLeft: 45 }}>Đăng xuất</span>
                     </a>
