@@ -1,10 +1,11 @@
 import { call, put } from "redux-saga/effects"
 import { fetchCartCreate } from "../actions/cartAction"
-import { CART, USER } from "../actions/type"
+import { USER } from "../actions/type"
 import { fetchLogin, fetchLogout, fetchRegister, fetchUpdateProfile } from "../actions/userAction"
 import { Cart } from "../api"
 import { LocalStorage } from "../helper"
 import { addToken, removeToken } from "../helper/Api"
+import { CART, cartAction } from "../redux/cartSlice"
 import store from "../store"
 
 export function* watchLogin(action: any) {
@@ -20,7 +21,7 @@ export function* watchLogin(action: any) {
             cart.user = data.data._id
             let result = yield call(fetchCartCreate, cart)
             if (result.data._id) {
-                yield put({ type: CART.INIT, payload: { ...result.data } })
+                yield put(cartAction.init({ ...result.data }))
             }
             // Cart.create(store.getState().cart);
         }
@@ -61,5 +62,5 @@ export function* watchLogout(action: any) {
     }
     removeToken()
     LocalStorage.remove('login')
-    yield put({ type: CART.DELETE_ALL })
+    yield put(cartAction.reset())
 }
