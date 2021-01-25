@@ -57,3 +57,10 @@ function App() {
 }
 
 export default App;
+
+
+/**
+ * redux toolkit
+ * Review code cũ
+ * Thay đổi, tự viết redux toolkit
+ */

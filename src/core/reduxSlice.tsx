@@ -1,7 +1,7 @@
 import { create } from "domain";
 import { LocalStorage } from "../helper";
 
-export function createSlice<Y, T extends { [key in string]: (state: Y, action: any) => any }>(slice: { name: string, initState: Y, reducers: T }): { action: { [key in keyof T]: (data?: any) => { type: string, payload: any } }, reducer: Function, type: { [key in keyof T]: string } } {
+export function createSlice<Y, T extends { [key in string]: (state: Y, action: any) => any }>(slice: { name: string, initState: Y, reducers: T }): { action: { [key in keyof T]: (data?: any) => { type: string, payload: any } }, reducer: (state: any, action: any) => any, type: { [key in keyof T]: string } } {
     let { reducers, initState, name } = slice;
 
     let action: any = {}
@@ -21,11 +21,12 @@ export function createSlice<Y, T extends { [key in string]: (state: Y, action: a
         if (typeof reducers[type] === 'undefined') return state;
 
         // call action when have
-        let stateReturn = reducers[type](state, action)
+        let stateTemp = { ...state };
+        let stateReturn = reducers[type](stateTemp, action)
 
         // check if reducer item have return item
-        if (stateReturn && stateReturn !== state) return stateReturn;
-        return { ...state }
+        if (stateReturn && stateReturn !== stateTemp) return stateReturn;
+        return state
     }
 
     let types: { [key in keyof T]: string } = typeTemp

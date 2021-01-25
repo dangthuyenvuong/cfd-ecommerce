@@ -13,12 +13,12 @@ export function closeCart() {
     }
 }
 
-export function cartAddItem(_id: string) {
-    // data = JSON.parse(JSON.stringify(data))
+export function cartAddItem(data: any) {
+    data = JSON.parse(JSON.stringify(data))
 
     return {
         type: CART.ADD_ITEM,
-        payload: _id
+        payload: data
     }
 }
 

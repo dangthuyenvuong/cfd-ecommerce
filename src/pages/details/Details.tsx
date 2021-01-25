@@ -30,7 +30,6 @@ export default function Details() {
 
     let product = useSelector((store: any) => store.product);
 
-
     return (
         <>
             <Breadcrumbs links={[

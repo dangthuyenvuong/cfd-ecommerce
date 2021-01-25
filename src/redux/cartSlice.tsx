@@ -36,8 +36,9 @@ let { action, reducer: cartSlice, type } = createSlice({
             if (f) {
                 f.cart_count++;
             } else {
-                action.payload.cart_count = 1;
-                list.push(action.payload)
+                let data = JSON.parse(JSON.stringify(action.payload))
+                data.cart_count = 1;
+                list.push(data)
             }
             total++;
 

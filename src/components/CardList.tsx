@@ -155,7 +155,7 @@ export default function CardList(props: any) {
         <div className="card--price__bot">
           {
             loading ? <><Skeleton variant="text" width="100%" /><Skeleton variant="text" width="100%" /></> : (
-              <div className="btn btn-buy" onClick={dispatch.bind(null, cartAction.addItem(props._id))}>
+              <div className="btn btn-buy" onClick={dispatch.bind(null, cartAction.addItem(props))}>
                 <span>Thêm vào giỏ hàng</span>
                 <img src="/assets/right-white.svg" alt="" />
               </div>

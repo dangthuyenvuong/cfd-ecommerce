@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
-import { openCart } from "../actions/cartAction";
+import { cartAction } from "../redux/cartSlice";
 
 export default function Header() {
   const categories = useSelector((state: any) => state.categories).list
@@ -77,7 +77,7 @@ export default function Header() {
               <Link className="user" to={user.login ? '/thong-tin-ca-nhan' : '/dang-nhap'}>
                 <img src="/assets/icon-user.svg" alt="user" />
               </Link>
-              <div className="cart" onClick={dispatch.bind(null, openCart())} >
+              <div className="cart" onClick={dispatch.bind(null, cartAction.open())} >
                 <img src="/assets/icon-cart.svg" alt="cart" />
                 {
                   cart.total > 0 && <span className="number">{cart.total}</span>

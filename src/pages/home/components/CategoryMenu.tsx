@@ -18,8 +18,8 @@ export default function CategoryMenu() {
                                     <h2 className="filter--title">Thể loại</h2>
                                     <ul className="filter--link">
                                         {
-                                            categories.list.filter((e: any, i: number) => i < 5).map((e: any) => (
-                                                <li> <Link to={`/the-loai/${e.slug}`}>{e.title}</Link></li>
+                                            categories.list.filter((e: any, i: number) => i < 5).map((e: any, i: number) => (
+                                                <li key={i}> <Link to={`/the-loai/${e.slug}`}>{e.title}</Link></li>
                                             ))
                                         }
                                     </ul>

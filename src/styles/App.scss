@@ -246,3 +246,11 @@ img {
 
 
 // ------------------------
+.product .thumbnail div {
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.product .thumbnail .active {
+  box-shadow: 0 0 0 1px $main-color;
+}

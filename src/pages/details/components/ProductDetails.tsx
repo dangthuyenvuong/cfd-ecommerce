@@ -4,12 +4,15 @@ import TabReviews from './TabReviews'
 import Flickity from 'react-flickity-component'
 import Carousel from "./Carousel";
 export default function ProductDetails(props: any) {
-  console.log(props)
+  let { loading } = props;
   return (
     <div className="row">
-      <div className="col-md-6">
+      <div className="" style={{ width: 400 }}>
         <div className="product--image">
-          <Carousel images={props.images} />
+          {
+            !loading && <Carousel images={props.images} />
+          }
+
         </div>
       </div>
       <div className="col-md-6">
