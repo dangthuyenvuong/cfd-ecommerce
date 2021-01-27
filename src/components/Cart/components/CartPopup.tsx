@@ -3,8 +3,10 @@ import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { FormatNumber } from "../../../helper";
-import { cartAction } from "../../../redux/cartSlice";
+// import { cartAction } from "../../../redux/cartSlice.tsx";
 import CartItem from "./CartItem";
+
+import { closeCart, openCart } from '../../../redux/cartRedux'
 
 
 
@@ -33,7 +35,7 @@ const Cart = () => {
             <div className="cart--inner">
                 <div className="cart--head">
                     <h3 className="cart--title">Giỏ hàng</h3>
-                    <div className="cart--close" onClick={dispatch.bind(null, cartAction.close())}>
+                    <div className="cart--close" onClick={() => dispatch(closeCart())}>
                         Đóng
               <img src="/assets/icon-close.svg" alt="" />
                     </div>
@@ -58,12 +60,12 @@ const Cart = () => {
                         <span>{FormatNumber(cart.amount)}VNĐ</span>
                     </div>
                     <div className="button" style={{ padding: 0 }}>
-                        <div className="btn--apply" onClick={() => dispatch(cartAction.close())} style={{ paddingLeft: 0 }}>
+                        <div className="btn--apply" onClick={() => dispatch(closeCart())} style={{ paddingLeft: 0 }}>
                             <span>← Tiếp tục mua sắm</span>
                         </div>
                         {
                             cart.total > 0 && (
-                                <Link onClick={() => dispatch(cartAction.close())} to="/thanh-toan" className="btn btn-buy">
+                                <Link onClick={() => dispatch(closeCart())} to="/thanh-toan" className="btn btn-buy">
                                     <span>Thanh toán</span>
                                 </Link>
                             )

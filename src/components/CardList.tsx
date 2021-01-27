@@ -2,7 +2,9 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { cartAction } from "../redux/cartSlice";
+// import { cartAction } from "../redux/cartSlice.tsx";
+// import { cartAction } from "../redux/cartSlice.tsx";
+import { addItem } from '../redux/cartRedux'
 import RatingStar from "./RatingStar";
 
 const style: { [key in string]: React.CSSProperties } = {
@@ -155,7 +157,7 @@ export default function CardList(props: any) {
         <div className="card--price__bot">
           {
             loading ? <><Skeleton variant="text" width="100%" /><Skeleton variant="text" width="100%" /></> : (
-              <div className="btn btn-buy" onClick={dispatch.bind(null, cartAction.addItem(props))}>
+              <div className="btn btn-buy" onClick={dispatch.bind(null, addItem(props))}>
                 <span>Thêm vào giỏ hàng</span>
                 <img src="/assets/right-white.svg" alt="" />
               </div>
